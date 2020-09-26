@@ -7,7 +7,6 @@ package service;
 
 import java.util.List;
 import javax.ejb.TransactionAttribute;
-import javax.ejb.TransactionAttributeType;
 import static javax.ejb.TransactionAttributeType.NOT_SUPPORTED;
 import static javax.ejb.TransactionAttributeType.REQUIRED;
 import static javax.ejb.TransactionAttributeType.SUPPORTS;
@@ -18,8 +17,6 @@ import javax.persistence.PersistenceContext;
 import static javax.persistence.PersistenceContextType.TRANSACTION;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 
 
 @TransactionManagement(CONTAINER)
@@ -31,7 +28,7 @@ public abstract class Service<T> {
     protected Class<T> classe;
 
     @TransactionAttribute(NOT_SUPPORTED)
-    protected void setClasse(@NotNull Class<T> classe) {
+    protected void setClasse( Class<T> classe) {
         this.classe = classe;
     }
 
@@ -39,17 +36,17 @@ public abstract class Service<T> {
     public abstract T create();
 
     @TransactionAttribute(SUPPORTS)
-    public boolean exist(@NotNull T entidade) {
+    public boolean exist(T entidade) {
         return true;
     }
 
-    public void persistence(@Valid T entidade) {
+    public void persistence(T entidade) {
         if (!exist(entidade)) {
             entityManager.persist(entidade);
         }
     }
 
-    public void update(@Valid T entidade) {
+    public void update(T entidade) {
         if (exist(entidade)) {
             entityManager.merge(entidade);
             entityManager.flush();
@@ -57,7 +54,7 @@ public abstract class Service<T> {
     }
 
 
-    public void delete(@Valid T entidade) {
+    public void delete(T entidade) {
         if (exist(entidade)) {
             entidade = entityManager.merge(entidade);
             entityManager.remove(entidade);
@@ -66,7 +63,7 @@ public abstract class Service<T> {
     }
 
     @TransactionAttribute(SUPPORTS)
-    public T findId(@NotNull Long id) {
+    public T findId(Long id) {
         return entityManager.find(classe, id);
     }
 

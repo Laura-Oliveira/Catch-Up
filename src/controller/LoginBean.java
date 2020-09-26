@@ -1,20 +1,25 @@
 package controller;
 
+import java.io.IOException;
+
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
+
 import entity.User;
 
+@ManagedBean(name = "loginBean")
+@RequestScoped
 public class LoginBean 
 {
 	private User user = new User();
 
-	  public String logar() 
+	  public String logar() throws IOException 
 	  {
 	    if(user.equals(user.getEmail()) && user.equals(user.getPassword())) 
 	    {
-	      /* Se escrever o login e senha correto então vai para a tela principal do sistema. */
-	      return "listagem de apartamentos";
+	    	FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
 	    }
-
-	    //Caso erre o login ou senha fica na mesma tela.
 	    return null;
 	  }
 
@@ -26,5 +31,17 @@ public class LoginBean
 	  public void setUser(User user) 
 	  {
 	    this.user = user;
+	  }
+	  
+	  public void mudarPagina()
+	  {
+		  try 
+		  {
+			FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
+		  } 
+		  catch (IOException e) 
+		  {
+			e.printStackTrace();
+		  }
 	  }
 }

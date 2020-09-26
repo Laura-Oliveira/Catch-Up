@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Catch Up - Cadastrar Imovel</title>
+    </h:head>
+    <h:body>
+        <ui:include src="/menu.xhtml" />
+        <p:fieldset legend="Cadastrar Imovel">
+            <h:form>
+                <p:growl id="growl" life="9000" />
+                <p:panelGrid columns="2">
+
+                    <p:outputLabel value="Nome:" for="name">
+                        <h:message for="name" errorStyle="color:darked;font-size:14px;"></h:message>
+                    </p:outputLabel>
+                    <p:inputText id="name" value="#{imovelBean.imovel.name}" title="Nome" required="true" 
+                                 requiredMessage="O campo NOME é obrigatório."
+                                 placeholder="Ex.:Camping 01"></p:inputText>
+
+                    <p:outputLabel value="Telefone: " for="telefone">
+                        <h:message for="telefone" errorStyle="color:darked;font-size:14px;"></h:message>
+                    </p:outputLabel>
+                    <p:inputText id="telefone" value="#{imovelBean.imovel.phone}" title="Telefone" required="true" 
+                                 requiredMessage="O campo TELEFONE é obrigatório."
+                                 placeholder="Ex.:(00) 00000-0000"/>
+
+                    <p:outputLabel value="Informações:" for="info">
+                        <h:message for="info" errorStyle="color:darked;font-size:14px;"></h:message>
+                    </p:outputLabel>
+                    <p:inputTextarea id="info" value="#{imovelBean.imovel.info}" title="Info" required="true" 
+                                 requiredMessage="O campo INFORMAÇÕES é obrigatório."/>
+
+                    <p:outputLabel value="Endereco:" for="endereco">
+                        <h:message for="endereco" errorStyle="color:darked;font-size:14px;"></h:message>
+                    </p:outputLabel>
+                    <p:inputText id="endereco" value="#{imovelBean.imovel.endereco}" title="Endereco" required="true" 
+                                 requiredMessage="O campo Endereco é obrigatório."
+                                 placeholder="Ex.:00000-00"/> 
+                </p:panelGrid>
+                <p:commandButton value="Cadastrar" actionListener="#{imovelBean.salvar()}"
+                                 onclick="return confirm('Confirma o cadastro desse camping?')" 
+                                 id="nonAjax" ajax="false">
+                </p:commandButton>
+            </h:form>
+        </p:fieldset>
+    </h:body>
+</html>

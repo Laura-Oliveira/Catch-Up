@@ -1,26 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package entity;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.Objects;
 import javax.persistence.*;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.br.CPF;
 
-/**
- *
- * @author Ramon
- */
 @Entity
 @Table(name = "tb_user")
 @Access(AccessType.FIELD)
@@ -72,7 +55,7 @@ import org.hibernate.validator.constraints.br.CPF;
                     @ColumnResult(name = "email", type = String.class)
         }
 )
-public class User implements BaseEntity, Serializable {
+public class User implements Serializable {
 
     public static final String USER_POR_NOME = "UserPorNome";
     public static final String USER_POR_EMAIL = "UserPorEmail";
@@ -86,23 +69,20 @@ public class User implements BaseEntity, Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
-    @CPF(message = "{invalid.cpf}")
+
     @Column(name = "TXT_CPF", nullable = false, length = 14, unique = true)
     private String cpf;
 
-    @NotNull
-    @Size(min = 5, max = 200)
+
+
     @Column(name = "TXT_NAME", nullable = false, length = 255)
     private String name;
 
-    @NotNull
-    @Email(message = "{invalid.email}")
+
     @Column(name = "TXT_EMAIL", nullable = false, length = 70)
     private String email;
 
-    @NotBlank
-    @Pattern(regexp = "((?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})", message = "{invalid.password})")
+
     @Column(name = "TXT_PASSWORD", nullable = false, length = 20)
     private String password;
 

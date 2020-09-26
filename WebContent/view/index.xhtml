@@ -10,6 +10,19 @@
 </h:head>
 
 <h:body>
-	<p>todo: construir página principal</p>
-</h:body>
+	<ui:include src="menu.xhtml" />
+	        <ui:repeat value="#{campingBean.campings}" var="camping">
+	            <p:panel id="camping" header="#{camping.name}" toggleable="true" toggleSpeed="500"  widgetVar="panel" style="margin-bottom:20px">
+	                <h:panelGrid columns="2" cellpadding="10">
+	                    <p:outputLabel value="Telefone:"/>
+	                    <h:outputText value="#{camping.phone}" />
+	                    <p:outputLabel value="Informações:"/>
+	                    <h:outputText value="#{camping.info}" />
+	                    <h:form>
+	                        <p:commandButton value="Fazer Reserva" action="#{bookingBean.MudarDePagina(camping)}"/>
+	                    </h:form>
+	                </h:panelGrid>
+	            </p:panel>
+	        </ui:repeat>
+    </h:body>
 </html>

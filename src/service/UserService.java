@@ -13,10 +13,6 @@ import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.persistence.TypedQuery;
-import javax.validation.constraints.NotNull;
-import javax.validation.executable.ExecutableType;
-import javax.validation.executable.ValidateOnExecution;
-
 import entity.User;
 
 /**
@@ -25,7 +21,6 @@ import entity.User;
  */
 @Stateless(name = "ejb/UserService")
 @LocalBean
-@ValidateOnExecution(type = ExecutableType.ALL)
 public class UserService extends Service<User> {
 
     @PostConstruct
@@ -39,7 +34,7 @@ public class UserService extends Service<User> {
     }
 
     @Override
-    public boolean exist(@NotNull User user) {
+    public boolean exist(User user) {
         TypedQuery<User> query
                 = entityManager.createNamedQuery(User.USER_POR_ID, classe);
         query.setParameter(1, user.getId());
