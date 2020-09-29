@@ -7,22 +7,33 @@
 
 <h:head>
 	<title>Catch Up</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<link rel="stylesheet" type="text/css" href="css/menu_navbar.css"/>
 </h:head>
 
 <h:body>
-	<ui:include src="menu.xhtml" />
-	        <ui:repeat value="#{campingBean.campings}" var="camping">
-	            <p:panel id="camping" header="#{camping.name}" toggleable="true" toggleSpeed="500"  widgetVar="panel" style="margin-bottom:20px">
-	                <h:panelGrid columns="2" cellpadding="10">
-	                    <p:outputLabel value="Telefone:"/>
-	                    <h:outputText value="#{camping.phone}" />
-	                    <p:outputLabel value="Informações:"/>
-	                    <h:outputText value="#{camping.info}" />
-	                    <h:form>
-	                        <p:commandButton value="Fazer Reserva" action="#{bookingBean.MudarDePagina(camping)}"/>
-	                    </h:form>
-	                </h:panelGrid>
-	            </p:panel>
-	        </ui:repeat>
-    </h:body>
+
+<div id="navbar">
+        <p><h:outputLink value="index.xhtml" class="link_menu">Lista Imóveis</h:outputLink> </p>
+        <p><h:outputLink value="login.xhtml" class="link_menu">Entrar</h:outputLink> </p>
+        <p><h:outputLink value="registerUser.xhtml" class="link_menu">Cadastrar Usuário</h:outputLink> </p>
+        <p><h:outputLink value="registerUser.xhtml" class="link_menu">Cadastrar Imóvel</h:outputLink> </p>
+    </div>
+
+	<ui:repeat value="#{campingBean.campings}" var="camping">
+		<p:panel id="camping" header="#{camping.name}" toggleable="true"
+			toggleSpeed="500" widgetVar="panel" style="margin-bottom:20px">
+			<h:panelGrid columns="2" cellpadding="10">
+				<p:outputLabel value="Telefone:" />
+				<h:outputText value="#{camping.phone}" />
+				<p:outputLabel value="Informações:" />
+				<h:outputText value="#{camping.info}" />
+				<h:form>
+					<p:commandButton value="Fazer Reserva"
+						action="#{bookingBean.MudarDePagina(camping)}" />
+				</h:form>
+			</h:panelGrid>
+		</p:panel>
+	</ui:repeat>
+</h:body>
 </html>

@@ -1,10 +1,46 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
-</body>
+<h:head>
+	<title>Catch Up</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<link rel="stylesheet" type="text/css" href="css/menu_navbar.css"/>
+</h:head>
+
+<h:body>
+
+<div id="navbar">
+        <p><h:outputLink value="index.xhtml" class="link_menu">Lista Imóveis</h:outputLink> </p>
+        <p><h:outputLink value="login.xhtml" class="link_menu">Entrar</h:outputLink> </p>
+        <p><h:outputLink value="registerUser.xhtml" class="link_menu">Cadastrar Usuário</h:outputLink> </p>
+        <p><h:outputLink value="registerUser.xhtml" class="link_menu">Cadastrar Imóvel</h:outputLink> </p>
+    </div>
+    
+    
+    <p:fieldset legend="Cadastrar Imovel">
+		<h:form>
+			<p:growl id="growl" life="9000" />
+			<p:panelGrid columns="2">
+
+				<p:outputLabel value="Nome:" for="nome">
+					<h:message for="nome" errorStyle="color:darked;font-size:14px;"></h:message>
+				</p:outputLabel>
+				<p:inputText id="nome" value="#{imovelBean.imovel.name}"
+					title="Titulo" required="true"
+					requiredMessage="O campo NOME é obrigatório."
+					placeholder="Ex.:Nome é obrigatório"></p:inputText>
+					
+					
+					<p:commandButton value="Cadastrar"
+				actionListener="#{imovelBean.salvar()}"
+				onclick="return confirm('Confirma o cadastro de usuário?')"
+				id="nonAjax" ajax="false">
+			</p:commandButton>
+		</h:form>
+	</p:fieldset>
+</h:body>
 </html>
