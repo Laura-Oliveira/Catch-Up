@@ -59,9 +59,8 @@ public class Imovel implements Serializable
     @Size (min = 5)
     @Column(name= "TXT_ENDERECO", nullable = false)
     private String endereco;
-    
 
-    public Imovel() {
+	public Imovel() {
     }
     
     
@@ -101,5 +100,13 @@ public class Imovel implements Serializable
         this.id = id;
     }
 
+    public String getEndereco() {
+		return endereco;
+	}
 
+
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
+	}
+	
 }
