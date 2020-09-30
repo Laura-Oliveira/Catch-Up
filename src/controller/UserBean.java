@@ -43,9 +43,6 @@ public class UserBean implements Serializable {
         this.usuario = usuario;
     }
     
-    public User findUser(String cpf){
-        return usuario = userService.getUserPorCPF(cpf);
-    }
      public void addMessage(String summary) {
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary,  null);
         FacesContext.getCurrentInstance().addMessage(null, message);

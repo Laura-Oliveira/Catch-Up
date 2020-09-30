@@ -7,21 +7,20 @@
 
 <h:head>
 	<title>Catch Up</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-	<link rel="stylesheet" type="text/css" href="css/menu_navbar.css"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet" type="text/css" href="css/menu_navbar.css" />
 </h:head>
 
 <h:body>
 
-<div id="navbar">
+	<div id="navbar">
         <p><h:outputLink value="index.xhtml" class="link_menu">Lista Imóveis</h:outputLink> </p>
         <p><h:outputLink value="login.xhtml" class="link_menu">Entrar</h:outputLink> </p>
         <p><h:outputLink value="registerUser.xhtml" class="link_menu">Cadastrar Usuário</h:outputLink> </p>
         <p><h:outputLink value="registerUser.xhtml" class="link_menu">Cadastrar Imóvel</h:outputLink> </p>
     </div>
-    
-    
-    <p:fieldset legend="Cadastrar Imovel">
+
+	<p:fieldset legend="Cadastrar Imovel">
 		<h:form>
 			<p:growl id="growl" life="9000" />
 			<p:panelGrid columns="2">
@@ -33,13 +32,28 @@
 					title="Titulo" required="true"
 					requiredMessage="O campo NOME é obrigatório."
 					placeholder="Ex.:Nome é obrigatório"></p:inputText>
-					
-					
-					<p:commandButton value="Cadastrar"
-				actionListener="#{imovelBean.salvar()}"
-				onclick="return confirm('Confirma o cadastro de usuário?')"
-				id="nonAjax" ajax="false">
-			</p:commandButton>
+
+				<p:outputLabel value="E-mail:" for="email">
+					<h:message for="email" errorStyle="color:darked;font-size:14px;"></h:message>
+				</p:outputLabel>
+				<p:inputText id="email" value="#{imovelBean.imovel.name}"
+					title="E-mail" required="true"
+					requiredMessage="O campo EMAIL é obrigatório."
+					placeholder="Ex.:E-mail é obrigatório"></p:inputText>
+
+				<p:outputLabel value="Senha:" for="senha">   
+				<h:message for="senha" errorStyle="color:darked;font-size:14px;"></h:message>     		
+				</p:outputLabel>
+				<p:password id="senha" value="#{passwordView.password2}" required="true"
+					requiredMessage="O campo SENHA é obrigatório."
+					placeholder="Ex.:Senha é obrigatório"/>
+
+				<p:commandButton value="Cadastrar"
+					actionListener="#{imovelBean.salvar()}"
+					onclick="return confirm('Confirma o cadastro de usuário?')"
+					id="nonAjax" ajax="false">
+				</p:commandButton>
+			</p:panelGrid>
 		</h:form>
 	</p:fieldset>
 </h:body>
