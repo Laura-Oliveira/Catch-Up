@@ -7,13 +7,13 @@
 
 <h:head>
 	<title>Catch Up</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-	<link rel="stylesheet" type="text/css" href="css/menu_navbar.css"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet" type="text/css" href="css/menu_navbar.css" />
 </h:head>
 
 <h:body>
 
-<!-- <h:form>
+	<!-- <h:form>
 	<p:menubar>
 	    <p:menuitem value="Delete" action="#{ImovelBean.redirectPageRegisterImovel}" update="messages" ajax="false" icon="pi pi-times"/>
  		<p:menuitem value="Lista de Imóveis" url="index.xhtml"icon="pi pi-times" />
@@ -21,23 +21,22 @@
 		<p:menuitem value="Cadastre-se" url="registerUser.xhtml"icon="pi pi-times" />
 		<p:menuitem value="Cadastrar Imóvel" url="registerImovel.xhtml"icon="pi pi-times" />  
 	</p:menubar> 
-	</h:form> -->
+	</h:form> 
 
 	<div id="navbar">
         <p><h:outputLink value="index.xhtml" class="link_menu">Lista Imóveis</h:outputLink> </p>
         <p><h:outputLink outcome="login.xhtml" class="link_menu">Entrar</h:outputLink> </p>
         <p><h:outputLink value="registerUser.xhtml" class="link_menu">Cadastrar Usuário</h:outputLink> </p>
         <p><h:outputLink value="registerImovel.xhtml" class="link_menu">Cadastrar Imóvel</h:outputLink> </p>
-    </div>
+    </div> -->
 
 	<h:form>
 		<p:dataTable var="car" value="#{ImovelBean.imoveis}"
-			widgetVar="listImovel"
-			emptyMessage="Nenhum imóvel encontrado"
+			widgetVar="listImovel" emptyMessage="Nenhum imóvel encontrado"
 			filteredValue="#{dtFilterView.filteredCars1}">
 
-			<p:column filterBy="#{imovel.tipo}" headerText="Color" footerText="in"
-				filterMatchMode="in">
+			<p:column filterBy="#{imovel.tipo}" headerText="Color"
+				footerText="in" filterMatchMode="in">
 				<f:facet name="filter">
 					<p:selectCheckboxMenu label="Tipo de Imóvel"
 						onchange="ImovelBean.getImovelPorTipo()" scrollHeight="150"

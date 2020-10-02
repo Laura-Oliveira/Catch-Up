@@ -4,19 +4,19 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-	
+
 <h:head>
 	<title>Catch Up - Cadastrar Imovel</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-	<link rel="stylesheet" type="text/css" href="css/registerImovel.css"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet" type="text/css" href="css/registerImovel.css" />
 </h:head>
 
 <h:body>
 
-	<p:fieldset legend="Cadastrar Imóvel">
-		<h:form>
+	<h:form>
+		<p:fieldset legend="Cadastrar Imóvel">
 			<p:panelGrid columns="2">
-			
+
 				<p:outputLabel value="Titulo:" for="titulo">
 					<h:message for="titulo" errorStyle="color:darked;font-size:14px;"></h:message>
 				</p:outputLabel>
@@ -60,11 +60,12 @@
 					onclick="return confirm('Confirma o cadastro desse imóvel?')"
 					id="btn_regiterImovel" ajax="false">
 				</p:commandButton>
-				
+
 			</p:panelGrid>
-		</h:form>
-	</p:fieldset>
-	
+		</p:fieldset>
+	</h:form>
+
+
 	<!--	<p:menubar>
 	    <p:menuitem value="Delete" action="#{menuView.delete}" update="messages" ajax="false" icon="pi pi-times"/>
  		<p:menuitem value="Lista de Imóveis" url="index.xhtml"icon="pi pi-times" />
