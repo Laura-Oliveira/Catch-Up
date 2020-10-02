@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 
@@ -44,6 +45,11 @@ public class ImovelBean implements Serializable
         imoveis = imovelService.getAllImoveis();
         return imoveis;
     }
+    
+    public List<Imovel> getImovelPorTipo() {
+        imoveis = imovelService.getImovelPorTipo();
+        return imoveis;
+    }
 
     public Imovel getImovel() {
         return imovel;
@@ -51,6 +57,11 @@ public class ImovelBean implements Serializable
 
     public void setImovel(Imovel imovel) {
         this.imovel = imovel;
+    }
+    
+    public void redirectPageRegisterImovel() throws IOException
+    {
+    	FacesContext.getCurrentInstance().getExternalContext().redirect("registerImovel.xhtml");
     }
 
     public void addMessage(String summary) {

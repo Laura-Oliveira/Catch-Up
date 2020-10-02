@@ -28,13 +28,17 @@ import javax.validation.constraints.Size;
             @NamedQuery(
                     name = Imovel.ALL_IMOVEL,
                     query = "SELECT c FROM Imovel c"
-            )
+            ),
+            @NamedQuery(
+            		name = Imovel.IMOVEL_POR_TIPO,
+            		query = "SELECT C FROM Imovel c WHERE c.tipoImovel LIKE ?1")
         }
 )
 public class Imovel implements Serializable 
 {
     public static final String IMOVEL_POR_NOME = "ImovelPorNome";
     public static final String ALL_IMOVEL = "AllImvel";
+    public static final String IMOVEL_POR_TIPO = "ImovelPorTipo";
 
     @Id
     @Column(name = "ID")
@@ -59,6 +63,11 @@ public class Imovel implements Serializable
     @Size (min = 5)
     @Column(name= "TXT_ENDERECO", nullable = false)
     private String endereco;
+    
+    @NotNull
+    @Size (min = 5)
+    @Column(name= "TXT_TIPOIMOVEL", nullable = false)
+    private String tipoImovel;
 
 	public Imovel() {
     }

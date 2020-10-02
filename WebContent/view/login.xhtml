@@ -11,9 +11,7 @@
 
 <h:body>
 
-	<p:growl id="msgs" showDetail="true" />
 	<p:fieldset legend="Catch Up - Entrar no Sistema">
-
 		<h:form>
 			<p:panelGrid columns="2">
 				<p:outputLabel value="Email:" for="email">
@@ -31,15 +29,12 @@
 					title="Password" required="true"
 					requiredMessage="O campo Senha é obrigatório." />
 			</p:panelGrid>
-			
-			<p:commandButton value="Entrar" action="#{loginBean.logar()}" 
-                                 onclick="return confirm('Confirma o cadastro desse usuário?')" ajax="false">
-            </p:commandButton>
             
-            <p:commandButton value="Cadastrar" action="#{loginBean.mudarPagina()}" ajax="false">
-            </p:commandButton>
+            <p:commandButton value="Cadastrar" action="#{loginBean.mudarPagina()}" ajax="false"/>
+            <p:commandButton value="Entrar" action="#{loginBean.logar()}" 
+                                 onclick="return confirm('Confirma o cadastro desse usuário?')" ajax="false"/>
+           
 		</h:form>
-		
 	</p:fieldset>
 
 </h:body>

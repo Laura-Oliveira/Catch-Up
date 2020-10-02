@@ -13,16 +13,15 @@
 
 <h:body>
 
-	<div id="navbar">
+	 <div id="navbar">
 		<p><h:outputLink value="index.xhtml" class="link_menu">Lista Imóveis</h:outputLink></p>
 		<p><h:outputLink value="login.xhtml" class="link_menu">Entrar</h:outputLink></p>
 		<p><h:outputLink value="registerUser.xhtml" class="link_menu">Cadastrar Usuário</h:outputLink></p>
-		<p><h:outputLink value="registerUser.xhtml" class="link_menu">Cadastrar Imóvel</h:outputLink></p>
-	</div>
+		<p><h:outputLink value="registerImovel.xhtml" class="link_menu">Cadastrar Imóvel</h:outputLink></p>
+	</div> 
 
-	<p:fieldset legend="Cadastrar Imovel">
+	<p:fieldset legend="Cadastrar Usuário">
 		<h:form>
-			<p:growl id="growl" life="9000" />
 			<p:panelGrid columns="2">
 
 				<p:outputLabel value="Nome:" for="nome">
@@ -47,7 +46,7 @@
 				<p:password id="senha" value="#{passwordView.password2}"
 					required="true" requiredMessage="O campo SENHA é obrigatório."
 					placeholder="Ex.:Senha é obrigatório" />
-
+				<br/>
 				<p:commandButton value="Cadastrar" action="#{userBean.salvar()}"
 					onclick="return confirm('Confirma o cadastro desse usuário?')"
 					ajax="false">
