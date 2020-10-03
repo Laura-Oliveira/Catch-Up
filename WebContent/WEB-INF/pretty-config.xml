@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pretty-config xmlns="http://ocpsoft.org/schema/rewrite-config-prettyfaces"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  
+   <url-mapping id="/">
+      <pattern value="/" />
+      <view-id value="/view/index.xhtml" />
+   </url-mapping>
+   
+   <url-mapping id="login">
+      <pattern value="/login" />
+      <view-id value="/view/login.xhtml" />
+   </url-mapping>
+   
+   <url-mapping id="user">
+      <pattern value="/user" />
+      <view-id value="/view/registerUser.xhtml" />
+   </url-mapping>
+   
+   <url-mapping id="imovel">
+      <pattern value="/imovel" />
+      <view-id value="/view/registerImovel.xhtml" />
+   </url-mapping>
+   
+</pretty-config>
