@@ -30,15 +30,27 @@ import javax.validation.constraints.Size;
                     query = "SELECT c FROM Imovel c"
             ),
             @NamedQuery(
-            		name = Imovel.IMOVEL_POR_TIPO,
-            		query = "SELECT C FROM Imovel c WHERE c.tipoImovel LIKE ?1")
+            		name = Imovel.IMOVEL_APARTAMENTO,
+            		query = "SELECT C FROM Imovel c WHERE c.tipoImovel LIKE 'apartamento'") 
         }
 )
 public class Imovel implements Serializable 
 {
     public static final String IMOVEL_POR_NOME = "ImovelPorNome";
     public static final String ALL_IMOVEL = "AllImvel";
-    public static final String IMOVEL_POR_TIPO = "ImovelPorTipo";
+    public static final String IMOVEL_APARTAMENTO = "ImovelApartamento";
+    
+  /*  private List<Employee> employeeList;
+    private List<Employee> filteredEmployeeList;
+
+    @PostConstruct
+    public void postConstruct() {
+        employeeList = DataService.INSTANCE.getEmployeeList();
+    }
+
+    public List<Employee> getEmployeeList() {
+        return employeeList;
+    } */
 
     @Id
     @Column(name = "ID")
@@ -55,8 +67,8 @@ public class Imovel implements Serializable
     @Column(name= "TXT_INFO", nullable = false)
     private String info;
     
-    @Pattern (regexp = "^(\\([0-9]{2}\\))\\s([9]{1})?([0-9]{4})-([0-9]{4})$", message="{invalid.phone}")
-    @Column(name="PHONE", nullable = false, length = 15)
+  /*  @Pattern (regexp = "^(\\([0-9]{2}\\))\\s([9]{1})?([0-9]{4})-([0-9]{4})$", message="{invalid.phone}") */
+    @Column(name="PHONE", nullable = false)
     private String phone;
     
     @NotNull
@@ -65,9 +77,19 @@ public class Imovel implements Serializable
     private String endereco;
     
     @NotNull
-    @Size (min = 5)
+    @Size (min = 2)
     @Column(name= "TXT_TIPOIMOVEL", nullable = false)
-    private String tipoImovel;
+    private String tipoImovel; 
+
+	@NotNull
+    @Size (min = 1)
+    @Column(name= "TXT_QUANT_COMODOS", nullable = false)
+    private String quantComodos; 
+    
+    @NotNull
+    @Size (min = 2)
+    @Column(name= "TXT_CIDADE", nullable = false)
+    private String cidadeImovel; 
 
 	public Imovel() {
     }
@@ -117,5 +139,34 @@ public class Imovel implements Serializable
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
 	}
+	
+	 public String getTipoImovel() {
+			return tipoImovel;
+		}
+
+
+		public void setTipoImovel(String tipoImovel) {
+			this.tipoImovel = tipoImovel;
+		}
+
+
+		public String getQuantComodos() {
+			return quantComodos;
+		}
+
+
+		public void setQuantComodos(String quantComodos) {
+			this.quantComodos = quantComodos;
+		}
+
+
+		public String getCidadeImovel() {
+			return cidadeImovel;
+		}
+
+
+		public void setCidadeImovel(String cidadeImovel) {
+			this.cidadeImovel = cidadeImovel;
+		}
 	
 }

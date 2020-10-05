@@ -46,8 +46,8 @@ public class ImovelBean implements Serializable
         return imoveis;
     }
     
-    public List<Imovel> getImovelPorTipo() {
-        imoveis = imovelService.getImovelPorTipo();
+    public List<Imovel> getImovelApartamento() {
+        imoveis = imovelService.getImovelApartamento();
         return imoveis;
     }
 

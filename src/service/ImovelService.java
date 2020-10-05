@@ -44,8 +44,8 @@ public class ImovelService extends Service<Imovel> {
     }
     
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)
-    public List<Imovel> getImovelPorTipo() {
-        return super.findEntities(Imovel.IMOVEL_POR_TIPO);
+    public List<Imovel> getImovelApartamento() {
+        return super.findEntities(Imovel.IMOVEL_APARTAMENTO);
     }
     
     public List<Imovel> findAll() {
