@@ -5,7 +5,7 @@ import java.util.Objects;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "tb_user")
+@Table(name = "user")
 @Access(AccessType.FIELD)
 @NamedQueries(
         {
