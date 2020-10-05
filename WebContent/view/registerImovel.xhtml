@@ -12,22 +12,7 @@
 </h:head>
 
 <h:body>
-
-<!-- 	<p:menubar>
-	    <p:menuitem value="Delete" action="#{menuView.delete}" update="messages" ajax="false" icon="pi pi-times"/>
- 		<p:menuitem value="Lista de Imóveis" url="index.xhtml"icon="pi pi-times" />
-		<p:menuitem value="Login" url="login.xhtml"icon="pi pi-times" />
-		<p:menuitem value="Cadastre-se" url="registerUser.xhtml"icon="pi pi-times" />
-		<p:menuitem value="Cadastrar Imóvel" url="registerImovel.xhtml"icon="pi pi-times" />  
-	</p:menubar>   
-	
-	 <div id="navbar">
-		<p><h:outputLink value="index.xhtml" class="link_menu">Lista Imóveis</h:outputLink></p>
-		<p><h:outputLink value="login.xhtml" class="link_menu">Entrar</h:outputLink></p>
-		<p><h:outputLink value="registerUser.xhtml" class="link_menu">Cadastrar Usuário</h:outputLink></p>
-		<p><h:outputLink value="registerImovel.xhtml" class="link_menu">Cadastrar Imóvel</h:outputLink></p>
-	</div> -->
-
+	<ui:include src="/view/menu.xhtml" />
 	<h:form>
 		<p:fieldset legend="Cadastrar Imóvel">
 			<p:panelGrid columns="2">

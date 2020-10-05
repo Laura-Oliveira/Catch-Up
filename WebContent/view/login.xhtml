@@ -11,7 +11,7 @@
 </h:head>
 
 <h:body>
-
+	<ui:include src="/view/menu.xhtml" />
 	<h:form>
 		<p:fieldset legend="Catch Up - Entrar no Sistema">
 			<p:panelGrid columns="2">
@@ -22,7 +22,6 @@
 					title="Email" required="true"
 					requiredMessage="O campo EMAIL é obrigatório."
 					placeholder="Ex.:grace_hopper@gmail.com" />
-
 				<p:outputLabel value="Senha:" for="password">
 					<h:message for="password" errorStyle="color:darked;font-size:14px;"></h:message>
 				</p:outputLabel>
@@ -30,13 +29,11 @@
 					title="Password" required="true"
 					requiredMessage="O campo Senha é obrigatório." />
 			</p:panelGrid>
-
 			<p:commandButton value="Cadastrar"
 				action="#{loginBean.mudarPagina()}" ajax="false" />
 			<p:commandButton value="Entrar" action="#{loginBean.logar()}"
 				onclick="return confirm('Confirma o cadastro desse usuário?')"
 				ajax="false" />
-
 		</p:fieldset>
 	</h:form>
 
