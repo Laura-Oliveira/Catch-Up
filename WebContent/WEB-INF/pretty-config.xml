@@ -2,8 +2,8 @@
 <pretty-config xmlns="http://ocpsoft.org/schema/rewrite-config-prettyfaces"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   
-   <url-mapping id="/">
-      <pattern value="/" />
+   <url-mapping id="home">
+      <pattern value="/home" />
       <view-id value="/view/index.xhtml" />
    </url-mapping>
    

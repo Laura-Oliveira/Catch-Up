@@ -12,14 +12,7 @@
 </h:head>
 
 <h:body>
-
-	<!-- 	 <div id="navbar">
-		<p><h:outputLink value="index.xhtml" class="link_menu">Lista Imóveis</h:outputLink></p>
-		<p><h:outputLink value="login.xhtml" class="link_menu">Entrar</h:outputLink></p>
-		<p><h:outputLink value="registerUser.xhtml" class="link_menu">Cadastrar Usuário</h:outputLink></p>
-		<p><h:outputLink value="registerImovel.xhtml" class="link_menu">Cadastrar Imóvel</h:outputLink></p>
-	</div>   -->
-
+	<ui:include src="/view/menu.xhtml" />
 	<h:form>
 		<p:fieldset legend="Cadastrar Usuário">
 			<p:panelGrid columns="2">
@@ -27,7 +20,7 @@
 				<p:outputLabel value="Nome:" for="nome">
 					<h:message for="nome" errorStyle="color:darked;font-size:14px;"></h:message>
 				</p:outputLabel>
-				<p:inputText id="nome" value="#{imovelBean.imovel.name}"
+				<p:inputText id="nome" value="#{userBean.usuario.name}"
 					title="Titulo" required="true"
 					requiredMessage="O campo NOME é obrigatório."
 					placeholder="Ex.:Nome é obrigatório"></p:inputText>
@@ -35,7 +28,7 @@
 				<p:outputLabel value="E-mail:" for="email">
 					<h:message for="email" errorStyle="color:darked;font-size:14px;"></h:message>
 				</p:outputLabel>
-				<p:inputText id="email" value="#{imovelBean.imovel.name}"
+				<p:inputText id="email" value="#{userBean.usuario.email}"
 					title="E-mail" required="true"
 					requiredMessage="O campo EMAIL é obrigatório."
 					placeholder="Ex.:E-mail é obrigatório"></p:inputText>
@@ -43,7 +36,7 @@
 				<p:outputLabel value="Senha:" for="senha">
 					<h:message for="senha" errorStyle="color:darked;font-size:14px;"></h:message>
 				</p:outputLabel>
-				<p:password id="senha" value="#{passwordView.password2}"
+				<p:password id="senha" value="#{userBean.usuario.password}"
 					required="true" requiredMessage="O campo SENHA é obrigatório."
 					placeholder="Ex.:Senha é obrigatório" />
 				<br />

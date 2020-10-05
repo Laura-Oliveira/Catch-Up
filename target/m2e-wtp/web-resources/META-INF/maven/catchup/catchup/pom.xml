@@ -78,13 +78,6 @@
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.glassfish.main.extras</groupId>
-			<artifactId>glassfish-embedded-static-shell</artifactId>
-			<version>4.1.1</version>
-			<scope>system</scope>
-			<systemPath>${glassfish.embedded-static-shell.jar}</systemPath>
-		</dependency>
-		<dependency>
 		    <groupId>org.ocpsoft.rewrite</groupId>
 		    <artifactId>rewrite-servlet</artifactId>
 		    <version>3.4.1.Final</version>
@@ -93,6 +86,13 @@
 		    <groupId>org.ocpsoft.rewrite</groupId>
 		    <artifactId>rewrite-config-prettyfaces</artifactId>
 		    <version>3.4.1.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>org.glassfish.main.extras</groupId>
+			<artifactId>glassfish-embedded-static-shell</artifactId>
+			<version>4.1.1</version>
+			<scope>system</scope>
+			<systemPath>${glassfish.embedded-static-shell.jar}</systemPath>
 		</dependency>
 	</dependencies>
 </project>
