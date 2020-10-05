@@ -14,34 +14,72 @@
 <h:body>
 	<ui:include src="/view/menu.xhtml" />
 	<h:form>
-		<p:dataTable var="car" value="#{ImovelBean.imoveis}"
+		<p:dataTable var="imovel" value="#{ImovelBean.imoveis}"
 			widgetVar="listImovel" emptyMessage="Nenhum imóvel encontrado"
 			filteredValue="#{dtFilterView.filteredCars1}">
 
-			<p:column filterBy="#{imovel.tipo}" headerText="Color"
-				footerText="in" filterMatchMode="in">
+			<p:column filterBy="#{imovelBean.imovel.tipoImovel}"
+				headerText="Filtros">
+				<p:commandButton value="Apartamento"
+					action="#{imovelBean.getImovelApartamento()}" ajax="false">
+				</p:commandButton>
 				<f:facet name="filter">
 					<p:selectCheckboxMenu label="Tipo de Imóvel"
+						onchange="imovelBean.getImovelApartamento()" scrollHeight="150">
+						<f:selectItems value="#{ImovelBean.imovel.tipoImovel}" />
+						<h:outputText value="#{imovelBean.imovel.name}" />
+					</p:selectCheckboxMenu>
+
+					<p:selectCheckboxMenu label="Cidade"
 						onchange="ImovelBean.getImovelPorTipo()" scrollHeight="150"
 						styleClass="custom-filter">
-						<f:selectItems value="#{ImovelBean.tipoImovel}" />
+						<f:selectItems value="#{ImovelBean.cidadeImovel}" />
+
 					</p:selectCheckboxMenu>
 				</f:facet>
-				<h:outputText value="#{imovel.tipoImovel}" />
 			</p:column>
+
 		</p:dataTable>
+
+		<ui:repeat value="#{ImovelBean.imoveis}" var="imovelList">
+			<p:panel id="imovel" header="#{imovelList.imovel.name}"
+				toggleable="true" toggleSpeed="500" widgetVar="panel"
+				style="margin-bottom:20px">
+				<h:panelGrid columns="2" cellpadding="10">
+					<p:outputLabel value="Telefone:" />
+					<h:outputText value="#{imovelList.imovel.phone}" />
+					<p:outputLabel value="Informações:" />
+					<h:outputText value="#{Imovelist.imovel.info}" />
+				</h:panelGrid>
+			</p:panel>
+		</ui:repeat>
 	</h:form>
 
-	<ui:repeat value="#{ImovelBean.imovel}" var="imovel">
-		<p:panel id="imovel" header="#{imovel.name}" toggleable="true"
-			toggleSpeed="500" widgetVar="panel" style="margin-bottom:20px">
-			<h:panelGrid columns="2" cellpadding="10">
-				<p:outputLabel value="Telefone:" />
-				<h:outputText value="#{imovel.phone}" />
-				<p:outputLabel value="Informações:" />
-				<h:outputText value="#{Imovel.info}" />
-			</h:panelGrid>
-		</p:panel>
-	</ui:repeat>
+		<p:dataTable value="#{ImovelBean.imoveis}" var="imovelList"
+			emptyMessage="Nenhum imóvel encontrado">
+
+			<p:column headerText="Imóvel">
+
+				<h:outputText value="#{imovelList.imovel.name}" />
+			</p:column>
+
+			<p:column headerText="Informações">
+				<h:outputText value="#{imovelList.imovel.info}" />
+			</p:column>
+
+			<p:column headerText="Telefone">
+				<h:outputText value="#{imovelList.imovel.phone}" />
+			</p:column>
+
+			<p:column headerText="Tipo Imóvel">
+				<h:outputText value="#{imovelList.imovel.tipoImovel}" />
+			</p:column>
+
+			<p:column headerText="Quantidade de Cômodos">
+				<h:outputText value="#{imovelList.imovel.tipoImovel}" />
+			</p:column>
+		</p:dataTable>
+
+	
 </h:body>
 </html>

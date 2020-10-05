@@ -45,9 +45,34 @@
 				</p:outputLabel>
 				<p:inputText id="endereco" value="#{imovelBean.imovel.endereco}"
 					title="Endereco" required="true"
-					requiredMessage="O campo Endereco é obrigatório."
-					placeholder="Ex.:00000-00" />
-			
+					requiredMessage="O campo ENDEREÇO é obrigatório."
+					placeholder="Ex.:Rua da Concórdia" />
+
+				<p:outputLabel value="Cidade:" for="cidadeImovel">
+					<h:message for="cidadeImovel" errorStyle="color:darked;font-size:14px;"></h:message>
+				</p:outputLabel>
+				<p:inputText id="cidadeImovel" value="#{imovelBean.imovel.cidadeImovel}"
+					title="Cidade" required="true"
+					requiredMessage="O campo CIDADE é obrigatório."
+					placeholder="Ex.:Rua da Concórdia" />
+
+				<p:outputLabel value="Tipo de Imóvel:" for="tipoImovel">
+					<h:message for="tipoImovel"
+						errorStyle="color:darked;font-size:14px;"></h:message>
+				</p:outputLabel>
+				<p:inputText id="tipoImovel" value="#{imovelBean.imovel.tipoImovel}"
+					title="Tipo de Imóvel" required="true"
+					requiredMessage="O campo TIPO DE IMÓVEL é obrigatório."
+					placeholder="Ex.: Apartamento/Casa" />
+
+				<p:outputLabel value="Quantidade de Cômodos:" for="quantComodos">
+					<h:message for="quantComodos"
+						errorStyle="color:darked;font-size:14px;"></h:message>
+				</p:outputLabel>
+				<p:inputText id="quantComodos"
+					value="#{imovelBean.imovel.quantComodos}"
+					title="Quantidade de Cômodos" required="true"
+					requiredMessage="O campo QUANTIDADE DE CÔMODOS é obrigatório." />
 
 				Insira as imagens do seu imóvel aqui
 				<p:fileUpload value="#{fileUploadView.files}" mode="simple"
@@ -64,15 +89,6 @@
 			</p:panelGrid>
 		</p:fieldset>
 	</h:form>
-
-
-	<!--	<p:menubar>
-	    <p:menuitem value="Delete" action="#{menuView.delete}" update="messages" ajax="false" icon="pi pi-times"/>
- 		<p:menuitem value="Lista de Imóveis" url="index.xhtml"icon="pi pi-times" />
-		<p:menuitem value="Login" url="login.xhtml"icon="pi pi-times" />
-		<p:menuitem value="Cadastre-se" url="registerUser.xhtml"icon="pi pi-times" />
-		<p:menuitem value="Cadastrar Imóvel" url="registerImovel.xhtml"icon="pi pi-times" />  -
-	</p:menubar> -->
 
 </h:body>
 </html>
