@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.IOException;
 import java.io.Serializable;
 
 import javax.annotation.PostConstruct;
@@ -12,8 +13,7 @@ import javax.faces.context.FacesContext;
 import entity.User;
 import service.UserService;
 
-
-@ManagedBean(name = "userBean")
+@ManagedBean
 @RequestScoped
 public class UserBean implements Serializable {
 

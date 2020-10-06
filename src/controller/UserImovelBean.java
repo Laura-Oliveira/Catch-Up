@@ -17,7 +17,6 @@ import service.UserService;
 import javax.inject.Named;
 //import javax.enterprise.context.RequestScoped;
 
-
 @ManagedBean
 @RequestScoped
 public class UserImovelBean implements Serializable {
