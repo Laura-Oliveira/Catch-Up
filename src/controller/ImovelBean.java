@@ -17,7 +17,7 @@ import service.ImovelService;
 import service.UserService;
 
 
-@ManagedBean(name = "imovelBean")
+@ManagedBean
 @RequestScoped
 public class ImovelBean implements Serializable 
 {

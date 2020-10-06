@@ -24,7 +24,6 @@ public class UserImovelService extends Service<UserImovel> {
         return new UserImovel();
     }
 	
-	
 	public boolean addFavorite(Imovel imovel, User user) {
     	UserImovel userImovel = new UserImovel();
     	
@@ -36,6 +35,8 @@ public class UserImovelService extends Service<UserImovel> {
 		
         // se encontrar um userImovel significa que o usuário já favoritou uma vez.
 		if(!query.getResultList().isEmpty()) {
+			// TODO remover favorito
+			
 			return false;
 		}
 		
@@ -45,7 +46,7 @@ public class UserImovelService extends Service<UserImovel> {
 		userImovel.setTipo(2);
 		
 		UserImovelBean uiBean = new UserImovelBean();
-		uiBean.add_favorito();
+//		uiBean.addFavorite();
 		
 		
 		return true;
