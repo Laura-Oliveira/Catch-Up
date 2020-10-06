@@ -9,6 +9,7 @@ import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.persistence.TypedQuery;
 import entity.Imovel;
+import entity.User;
 
 @Stateless(name = "ejb/ImovelService")
 @LocalBean
@@ -68,5 +69,9 @@ public class ImovelService extends Service<Imovel> {
 		
 		return imovel; 
 	}
+    
+    
+    
+    
 
 }

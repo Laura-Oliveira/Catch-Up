@@ -1,6 +1,8 @@
 package entity;
 
 import java.io.Serializable;
+import java.util.Set;
+
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Column;
@@ -10,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -21,17 +24,18 @@ import javax.validation.constraints.Size;
 @NamedQueries(
         {
             @NamedQuery(
-                    name = Imovel.IMOVEL_POR_NOME,
-                    query = "SELECT c FROM Imovel c WHERE c.name LIKE ?1"
+                name = Imovel.IMOVEL_POR_NOME,
+                query = "SELECT c FROM Imovel c WHERE c.name LIKE ?1"
                     
             ),
             @NamedQuery(
-                    name = Imovel.ALL_IMOVEL,
-                    query = "SELECT c FROM Imovel c"
+                name = Imovel.ALL_IMOVEL,
+                query = "SELECT c FROM Imovel c"
             ),
             @NamedQuery(
-            		name = Imovel.IMOVEL_APARTAMENTO,
-            		query = "SELECT C FROM Imovel c WHERE c.tipoImovel LIKE 'apartamento'") 
+        		name = Imovel.IMOVEL_APARTAMENTO,
+        		query = "SELECT C FROM Imovel c WHERE c.tipoImovel LIKE 'apartamento'"),
+           
         }
 )
 public class Imovel implements Serializable 
@@ -90,6 +94,9 @@ public class Imovel implements Serializable
     @Size (min = 2)
     @Column(name= "TXT_CIDADE", nullable = false)
     private String cidadeImovel; 
+    
+    @OneToMany(mappedBy = "imovel")
+    Set<UserImovel> userImovel;
 
 	public Imovel() {
     }

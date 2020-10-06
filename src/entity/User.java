@@ -1,7 +1,10 @@
 package entity;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
+
 import javax.persistence.*;
 
 @Entity
@@ -55,7 +58,7 @@ public class User implements Serializable {
     public static final String USER_POR_LETRA = "UserPorLetra";
     public static final String USER_POR_ID = "UserPorId";
     public static final String ALL_USERS = "AllUsers";
-
+    
     @Id
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -72,6 +75,9 @@ public class User implements Serializable {
     @Column(name = "TXT_PASSWORD", nullable = false, length = 20)
     private String password;
 
+    @OneToMany(mappedBy = "user")
+    Set<UserImovel> userImovel;
+    
     public Long getId() {
         return id;
     }
