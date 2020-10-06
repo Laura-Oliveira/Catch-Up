@@ -44,11 +44,6 @@ public class ImovelService extends Service<Imovel> {
         return super.findEntities(Imovel.ALL_IMOVEL);
     }
     
-    @TransactionAttribute(TransactionAttributeType.SUPPORTS)
-    public List<Imovel> getImovelApartamento() {
-        return super.findEntities(Imovel.IMOVEL_APARTAMENTO);
-    }
-    
     public List<Imovel> findAll() {
 		List<Imovel> imovel = null;
 		//Session session = null;
