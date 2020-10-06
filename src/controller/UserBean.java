@@ -10,10 +10,10 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
 import entity.User;
+import entity.User_;
 import service.UserService;
 
-
-@ManagedBean(name = "userBean")
+@ManagedBean
 @RequestScoped
 public class UserBean implements Serializable {
 

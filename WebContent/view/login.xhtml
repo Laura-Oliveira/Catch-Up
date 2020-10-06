@@ -29,10 +29,7 @@
 					title="Password" required="true"
 					requiredMessage="O campo Senha é obrigatório." />
 			</p:panelGrid>
-			<p:commandButton value="Cadastrar"
-				action="#{loginBean.mudarPagina()}" ajax="false" />
 			<p:commandButton value="Entrar" action="#{loginBean.logar()}"
-				onclick="return confirm('Confirma o cadastro desse usuário?')"
 				ajax="false" />
 		</p:fieldset>
 	</h:form>
