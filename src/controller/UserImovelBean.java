@@ -18,7 +18,7 @@ import javax.inject.Named;
 //import javax.enterprise.context.RequestScoped;
 
 
-@ManagedBean(name = "userImovelBean")
+@ManagedBean
 @RequestScoped
 public class UserImovelBean implements Serializable {
     
@@ -41,8 +41,8 @@ public class UserImovelBean implements Serializable {
 	}
 
 	public void addFavorite() {
-    	addMessage("Alô.");
-//    	throw new RuntimeException("Teste de exeção");
+//    	addMessage("Alô.");
+    	throw new RuntimeException("Teste de exeção");
     	
 //        this.userImovelService.persistence(this.userImovel);
 //        this.userImovel = new UserImovel();

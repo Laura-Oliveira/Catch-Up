@@ -35,6 +35,8 @@ public class UserImovelService extends Service<UserImovel> {
 		
         // se encontrar um userImovel significa que o usuário já favoritou uma vez.
 		if(!query.getResultList().isEmpty()) {
+			// TODO remover favorito
+			
 			return false;
 		}
 		
