@@ -16,16 +16,13 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "user_imovel")
 @Access(AccessType.FIELD)
-@NamedQueries(
-    {
-    	@NamedQuery(
-	    	name = UserImovel.IMOVEL_FAVORITO_POR_ID,
-	    	query = "SELECT ui FROM UserImovel ui "
-	    			+ "WHERE ui.user.id = ?1 "
-	    			+ "and ui.imovel.id = ?2"
-	    			+ "and ui.tipo = 2"),  // TODO enumerar os tipos.
-    }
-)
+//@NamedQueries(
+//    {
+//    	@NamedQuery(
+//	    	name = UserImovel.IMOVEL_FAVORITO_POR_ID,
+//	    	query = "SELECT u FROM UserImovel u WHERE ui.USER_ID = ?1 and ui.IMOVEL_ID = ?2 and ui.tipo = 2"),  // TODO enumerar os tipos.
+//    }
+//)
 public class UserImovel {
 	
 	public static final String IMOVEL_FAVORITO_POR_ID = "ImovelFavoritoPorId";
