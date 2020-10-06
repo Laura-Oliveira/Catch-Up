@@ -5,6 +5,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
+import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
 import entity.Imovel;
@@ -14,7 +18,9 @@ import entity.Imovel;
 public class FilterService {
      
     private final static String[] cidades;
-     
+    private Imovel imovel;
+    private List<Imovel> imoveis;
+    private FilterService filterService;
      
     static {
     	cidades = new String[5];
@@ -42,4 +48,16 @@ public class FilterService {
     public List<String> getCidades() {
         return Arrays.asList(cidades);
     }
+    
+ /*   @TransactionAttribute(TransactionAttributeType.SUPPORTS)
+    public List<Imovel> getImovelApartamento() 
+    {
+        return super.findEntities(Imovel.IMOVEL_APARTAMENTO);
+    }
+    
+    @TransactionAttribute(TransactionAttributeType.SUPPORTS)
+    public List<Imovel> getImovelCasa() 
+    {
+        return super.findEntities(Imovel.IMOVEL_CASA);
+    } */
 }
