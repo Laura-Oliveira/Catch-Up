@@ -123,10 +123,14 @@
                     <h:outputText value="#{imovel.quantComodos}" />
                     
                     <h:form>
+<!-- 
                         <p:commandButton 
                         	value="Favoritar" 
                         	action="#{userImovelBean.addFavorite()}"                      
-                       	/>
+                       	/> -->
+
+                        <p:commandButton value="Favoritar" action="#{bookingBean.MudarDePagina(camping)}"/>
+                        
                     </h:form>
                 </h:panelGrid>
             </p:panel>
