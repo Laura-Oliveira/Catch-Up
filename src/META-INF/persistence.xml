@@ -4,6 +4,7 @@
 		<jta-data-source>jdbc/Catchup</jta-data-source>
 		<class>entity.User</class>
 		<class>entity.Imovel</class>
+		<class>entity.UserImovel</class>
 		<exclude-unlisted-classes>false</exclude-unlisted-classes>
 		<properties>	
 		    <property name="eclipselink.logging.level" value="FINE"/>
