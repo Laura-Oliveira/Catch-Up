@@ -9,8 +9,9 @@ import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.persistence.TypedQuery;
 import entity.Imovel;
+import entity.User;
 
-@Stateless(name = "ejb/CampingService")
+@Stateless(name = "ejb/ImovelService")
 @LocalBean
 public class ImovelService extends Service<Imovel> {
 
@@ -27,10 +28,10 @@ public class ImovelService extends Service<Imovel> {
     }
 
     @Override
-    public boolean exist(Imovel camping) {
+    public boolean exist(Imovel imovel) {
         TypedQuery<Imovel> query
                 = entityManager.createNamedQuery(Imovel.IMOVEL_POR_NOME, classe);
-        query.setParameter(1, camping.getName());
+        query.setParameter(1, imovel.getName());
         return !query.getResultList().isEmpty();
     }
 
@@ -63,5 +64,9 @@ public class ImovelService extends Service<Imovel> {
 		
 		return imovel; 
 	}
+    
+    
+    
+    
 
 }

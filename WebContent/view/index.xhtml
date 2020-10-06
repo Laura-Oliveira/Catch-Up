@@ -7,22 +7,137 @@
 
 <h:head>
 	<title>Catch Up</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </h:head>
 
 <h:body>
-	<ui:include src="menu.xhtml" />
-	        <ui:repeat value="#{campingBean.campings}" var="camping">
-	            <p:panel id="camping" header="#{camping.name}" toggleable="true" toggleSpeed="500"  widgetVar="panel" style="margin-bottom:20px">
-	                <h:panelGrid columns="2" cellpadding="10">
-	                    <p:outputLabel value="Telefone:"/>
-	                    <h:outputText value="#{camping.phone}" />
-	                    <p:outputLabel value="Informações:"/>
-	                    <h:outputText value="#{camping.info}" />
-	                    <h:form>
-	                        <p:commandButton value="Fazer Reserva" action="#{bookingBean.MudarDePagina(camping)}"/>
-	                    </h:form>
-	                </h:panelGrid>
-	            </p:panel>
-	        </ui:repeat>
-    </h:body>
+	<ui:include src="/view/menu.xhtml" />
+
+	<style type="text/css">
+.ui-datatable {
+	margin-bottom: 25px
+}
+
+.ui-datatable .ui-datatable-header {
+	text-align: right !important;
+}
+
+.ui-button-text-only .ui-button-text {
+	padding: 0.3em 0.4em;
+}
+
+.ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-header .ui-chkbox {
+	visibility: hidden;
+}
+
+.ui-filter-column .ui-column-customfilter .custom-filter {
+	width: 100%;
+	box-sizing: border-box;
+}
+
+.year-spinner input {
+	width: 100%;
+	box-sizing: border-box;
+}
+</style>
+
+	<style type="text/css">
+    .ui-datatable {
+        margin-bottom: 25px
+    }
+ 
+    .ui-datatable .ui-datatable-header {
+        text-align: right !important;
+    }
+ 
+    .ui-button-text-only .ui-button-text {
+        padding: 0.3em 0.4em;
+    }
+ 
+    .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-header .ui-chkbox {
+        visibility: hidden;
+    }
+ 
+    .ui-filter-column .ui-column-customfilter .custom-filter {
+        width: 100%;
+        box-sizing: border-box;
+    }
+ 
+    .year-spinner input {
+        width: 100%;
+        box-sizing: border-box;
+    }
+</style>
+ 
+ 
+<h:form>
+    <p:dataTable var="car" value="#{filterViewBean.cidades}" widgetVar="cidadesTable"
+                 emptyMessage="Nenhum imóvel encontrado" filteredValue="#{filterViewBean.filteredCidades}">
+ 
+   <!--     <f:facet name="header">
+            <p:outputPanel>
+                <h:outputText value="Buscar:" />
+                <p:inputText id="globalFilter" onkeyup="PF('cidadesTable').filter()" 
+                style="width:200px" placeholder="Insira uma palavra chave"/>
+            </p:outputPanel>
+        </f:facet>
+         --> 
+ 
+        <p:column filterBy="#{imovel.cidadeImovel}" headerText="Cidade" filterMatchMode="in">
+            <f:facet name="filter">
+                <p:selectCheckboxMenu label="Cidade" onchange="filterViewBean" 
+                scrollHeight="150" styleClass="custom-filter">
+                    <f:selectItems value="#{filterViewBean.cidades}" />
+                </p:selectCheckboxMenu>
+            </f:facet>
+            <h:outputText value="#{imovelBean.imovel.cidadeImovel}" />
+        </p:column>
+ 
+        <p:column filterBy="#{imovel.getImovelTipo()}" headerText="Tipo de Imóvel" filterMatchMode="equals">
+            <f:facet name="filter">
+                <p:selectOneButton onchange="PF('cidadesTable').filter()" styleClass="custom-filter">
+                    <f:converter converterId="javax.faces.Boolean" />
+                    <f:selectItem itemLabel="Todos" itemValue="" />
+                    <f:selectItem itemLabel="Apartamento" itemValue="true" />
+                    <f:selectItem itemLabel="Casa" itemValue="false" />
+                </p:selectOneButton>
+            </f:facet>
+            <h:outputText value="#{imovelBean.imovel.tipoImovel ? 'Apartamento': 'Casa'}" />
+        </p:column>
+ 
+    <ui:repeat value="#{imovelBean.imoveis}" var="imovel">
+            <p:panel id="imovel" header="#{imovel.name}" toggleable="true" toggleSpeed="500"  widgetVar="panel" style="margin-bottom:20px">
+                <h:panelGrid columns="2" cellpadding="10">
+                    <p:outputLabel value="Título:"/>
+                    <h:outputText value="#{imovel.name}" />
+                    <p:outputLabel value="Informações:"/>
+                    <h:outputText value="#{imovel.info}" />
+                    <p:outputLabel value="Telefone:"/>
+                    <h:outputText value="#{imovel.phone}" />
+                    <p:outputLabel value="Endereço:"/>
+                    <h:outputText value="#{imovel.endereco}" />
+                    <p:outputLabel value="Cidade:"/>
+                    <h:outputText value="#{imovel.cidadeImovel}" />
+                    <p:outputLabel value="Cômodos:"/>
+                    <h:outputText value="#{imovel.quantComodos}" />
+                    
+                    <h:form>
+
+                   	<p:commandButton 
+	                   	value="Favoritar" 
+	                   	action="#{userImovelBean.addFavorite()}"                      
+                  	/>
+
+                        
+                    </h:form>
+                </h:panelGrid>
+            </p:panel>
+        </ui:repeat>
+    </p:dataTable>
+    
+ 
+ 
+</h:form>
+
+</h:body>
 </html>

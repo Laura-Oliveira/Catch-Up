@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 
@@ -15,8 +16,7 @@ import entity.User;
 import service.ImovelService;
 import service.UserService;
 
-
-@ManagedBean(name = "imovelBean")
+@ManagedBean
 @RequestScoped
 public class ImovelBean implements Serializable 
 {
@@ -44,6 +44,11 @@ public class ImovelBean implements Serializable
         imoveis = imovelService.getAllImoveis();
         return imoveis;
     }
+    
+    public List<Imovel> setListaImoveis()
+    {
+		return imoveis;
+    }
 
     public Imovel getImovel() {
         return imovel;
@@ -52,10 +57,14 @@ public class ImovelBean implements Serializable
     public void setImovel(Imovel imovel) {
         this.imovel = imovel;
     }
+    
+    public void redirectPageRegisterImovel() throws IOException
+    {
+    	FacesContext.getCurrentInstance().getExternalContext().redirect("registerImovel.xhtml");
+    }
 
     public void addMessage(String summary) {
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, null);
         FacesContext.getCurrentInstance().addMessage(null, message);
-    } 
-    
+    }
 }

@@ -13,12 +13,11 @@ import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.persistence.TypedQuery;
-import entity.User;
 
-/**
- *
- * @author isabella
- */
+import entity.Imovel;
+import entity.User;
+import entity.UserImovel;
+
 @Stateless(name = "ejb/UserService")
 @LocalBean
 public class UserService extends Service<User> {
@@ -58,13 +57,4 @@ public class UserService extends Service<User> {
     public List<User> getAllUsers(){
         return super.findEntities(User.ALL_USERS);
     }
-    
-    @TransactionAttribute(TransactionAttributeType.SUPPORTS)
-    public User getUserPorCPF(String cpf){
-        return super.findEntity(new Object[]{cpf}, User.USER_POR_CPF);
-    }
-    
-    
-    
-
 }

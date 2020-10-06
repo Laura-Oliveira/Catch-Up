@@ -1,11 +1,14 @@
 package entity;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
+
 import javax.persistence.*;
 
 @Entity
-@Table(name = "tb_user")
+@Table(name = "user")
 @Access(AccessType.FIELD)
 @NamedQueries(
         {
@@ -33,11 +36,6 @@ import javax.persistence.*;
                     name = User.ALL_USERS,
                     query = "SELECT u FROM User u"
             )
-            ,            
-            @NamedQuery(
-                    name = User.USER_POR_CPF,
-                    query = "SELECT u FROM User u WHERE u.cpf LIKE ?1"
-            )
         }
 )
 
@@ -47,8 +45,6 @@ import javax.persistence.*;
             @EntityResult(entityClass = User.class)},
         columns = {
             @ColumnResult(name = "id", type = Long.class)
-            ,
-                    @ColumnResult(name = "cpf", type = String.class)
             ,
                     @ColumnResult(name = "name", type = String.class)
             ,
@@ -62,18 +58,11 @@ public class User implements Serializable {
     public static final String USER_POR_LETRA = "UserPorLetra";
     public static final String USER_POR_ID = "UserPorId";
     public static final String ALL_USERS = "AllUsers";
-    public static final String USER_POR_CPF = "UserPorCpf";
-
+    
     @Id
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-
-    @Column(name = "TXT_CPF", nullable = false, length = 14, unique = true)
-    private String cpf;
-
-
 
     @Column(name = "TXT_NAME", nullable = false, length = 255)
     private String name;
@@ -86,20 +75,15 @@ public class User implements Serializable {
     @Column(name = "TXT_PASSWORD", nullable = false, length = 20)
     private String password;
 
+    @OneToMany(mappedBy = "user")
+    Set<UserImovel> userImovel;
+    
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
     }
 
     public String getName() {
