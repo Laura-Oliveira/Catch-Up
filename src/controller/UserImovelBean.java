@@ -10,6 +10,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
+import entity.Imovel;
 import entity.User;
 import entity.UserImovel;
 import service.UserImovelService;
@@ -40,15 +41,21 @@ public class UserImovelBean implements Serializable {
 		this.userImovel = userImovel;
 	}
 
-	public void addFavorite() {
-//    	addMessage("Alô.");
-    	throw new RuntimeException("Teste de exeção");
-    	
-//        this.userImovelService.persistence(this.userImovel);
-//        this.userImovel = new UserImovel();
-//        //addMessage("UserImovel cadastrado com sucesso!");
-//        
-//        this.userImovel = null;
+	public void adicionarFavorito(User user, Imovel imovel) {		
+		this.userImovel.setImovel(imovel);
+		this.userImovel.setUser(user);
+		this.userImovel.setTipo(2);
+		
+		if(this.userImovelService.isFavorito(this.userImovel)) {
+	        this.userImovelService.persistence(this.userImovel);
+	        this.userImovel = new UserImovel();
+	        addMessage("Favoritado!");
+	        this.userImovel = null;
+		}
+		
+		// TODO remover favorito.
+		addMessage("Desfavoritado!");
+
     }
     
     public void addMessage(String summary) {
