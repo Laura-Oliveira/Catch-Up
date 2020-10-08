@@ -55,14 +55,6 @@ public class LoginBean implements Serializable
 			  mudarPagina();
 			  addMessage(summary);
 		    } 
-		  /*  try
-		  {
-			  
-		  }
-		  catch(IOException e)
-		  {
-			  System.out.print("Erro " + e);
-		  } */
 	  }
 
 	  public void addMessage(String summary) 
@@ -71,7 +63,7 @@ public class LoginBean implements Serializable
 	        FacesContext.getCurrentInstance().addMessage("Usuário logado com sucesso!", message);
 	    }
       
-	  public void mudarPagina()
+	  public void mudarPagina() throws IOException
 	  {
 		  try 
 		  {
@@ -79,7 +71,7 @@ public class LoginBean implements Serializable
 		  } 
 		  catch (IOException e) 
 		  {
-			e.printStackTrace();
+			  FacesContext.getCurrentInstance().getExternalContext().redirect("view/error.xhtml");
 		  }
 	  }
 }
