@@ -2,11 +2,15 @@ package controller;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
+import entity.Filtro;
 import entity.Imovel;
 import service.ImovelService;
+import utils.FilterMount;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -21,9 +25,9 @@ import entity.Imovel;
 @ManagedBean
 @RequestScoped
 public class FilterViewBean implements Serializable {
-	
-	private String apartamento;
-    private List<Imovel> imoveis;
+	private Filtro filtro;
+	private FilterMount filterMount;
+    private List<Imovel> imoveis = new ArrayList<Imovel>();
     private  Imovel imovel;
     
     @EJB
@@ -32,29 +36,48 @@ public class FilterViewBean implements Serializable {
     @PostConstruct
     public void init() {
     	imovel = imovelService.create();
-    	apartamento = "";
+    	filtro = new Filtro();
+    	filterMount = new FilterMount();
     }
     
-    public List<Imovel> getImoveis() throws IOException {
-    	
-    	System.out.println(apartamento);
-    	
-    	if(apartamento.equals("Apartamento")) {
-    		imoveis = imovelService.getImovelApartamento();
-            return imoveis;
+    public List<Imovel> getImoveis() {
+    	imoveis.clear();
+    	if(filtro.getTipoImovel() != "n/a" && filtro.getCidade().equals("n/a")) {
+    		imoveis.addAll(imovelService.getImovelByTipoImovel(filtro.getTipoImovel()));
+    	}
+    	if(filtro.getCidade() != "n/a" && filtro.getTipoImovel().equals("n/a")) {
+    		imoveis.addAll(imovelService.getImovelByCidade(filtro.getCidade()));
+    	}
+    	if(filtro.getTipoImovel() != "n/a" && filtro.getCidade() != "n/a") {
+    		imoveis.addAll(imovelService.getImovelByTipoAndCidade(filtro.getTipoImovel(), filtro.getCidade()));
+    	}
+    		
+    	if(filtro.getCidade().equals("n/a") && filtro.getTipoImovel().equals("n/a")) {
+    		imoveis = imovelService.getAllImoveis();
     	}
     	
-        imoveis = imovelService.getAllImoveis();
         return imoveis;
     }
+    
 
-	public String getApartamento() {
-		return apartamento;
+	public Filtro getFiltro() {
+		return filtro;
 	}
 
-	public void setApartamento(String apartamento) {
-		this.apartamento = apartamento;
+	public void setFiltro(Filtro filtro) {
+		this.filtro = filtro;
 	}
+
+	public FilterMount getFilterMount() {
+		return filterMount;
+	}
+
+	public void setFilterMount(FilterMount filterMount) {
+		this.filterMount = filterMount;
+	}
+	
+	
+    
     
     
  

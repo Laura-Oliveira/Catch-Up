@@ -1,13 +1,21 @@
-package utils;
+package entity;
 
 import java.util.List;
 
-public class Filter {
+public class Filtro {
 	
 	private String tipoImovel;
 	private String cidade;
 	private int qtdComodos;
 	
+	
+	
+	public Filtro() {
+		super();
+		this.tipoImovel = "n/a";
+		this.cidade = "n/a";
+		this.qtdComodos = 0;
+	}
 	public String getTipoImovel() {
 		return tipoImovel;
 	}

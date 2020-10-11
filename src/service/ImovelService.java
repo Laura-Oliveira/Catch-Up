@@ -27,33 +27,27 @@ public class ImovelService extends Service<Imovel> {
         return new Imovel();
     }
 
-    @Override
-    public boolean exist(Imovel imovel) {
-        TypedQuery<Imovel> query
-                = entityManager.createNamedQuery(Imovel.IMOVEL_POR_NOME, classe);
-        query.setParameter(1, imovel.getName());
-        return !query.getResultList().isEmpty();
-    }
-
-    @TransactionAttribute(TransactionAttributeType.SUPPORTS)
-    public Imovel getImoveisPorNome(String nome) {
-        return super.findEntity(new Object[]{nome}, Imovel.IMOVEL_POR_NOME);
-    }
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)
     public List<Imovel> getAllImoveis() {
         return super.findEntities(Imovel.ALL_IMOVEL);
     }
     
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)
-    public List<Imovel> getImovelApartamento() 
+    public List<Imovel> getImovelByTipoImovel(String tipoImovel) 
     {
-        return super.findEntities(Imovel.IMOVEL_APARTAMENTO);
+        return super.findEntities(new Object[]{tipoImovel}, Imovel.TIPO_IMOVEL);
     }
     
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)
-    public List<Imovel> getImovelCasa() 
+    public List<Imovel> getImovelByCidade(String cidade) 
     {
-        return super.findEntities(Imovel.IMOVEL_CASA);
+        return super.findEntities(new Object[]{cidade}, Imovel.CIDADES);
+    }
+    
+    @TransactionAttribute(TransactionAttributeType.SUPPORTS)
+    public List<Imovel> getImovelByTipoAndCidade(String tipoImovel, String cidade) 
+    {
+        return super.findEntities(new Object[]{tipoImovel, cidade}, Imovel.TIPOIMOVEL_CIDADE);
     }
     
 }

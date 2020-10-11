@@ -70,7 +70,18 @@
 </style>
 
 	<h:form>
-		<p:inputText id="apartamento" value="#{filterViewBean.apartamento}" placeholder="Apartamento"/>
+		<!-- <p:inputText id="apartamento" value="#{filterViewBean.filtro.tipoImovel}" placeholder="Apartamento"/> -->
+		<p:outputLabel for="@next" value="Cidade:" />
+		<p:selectOneMenu value="#{filterViewBean.filtro.cidade}">
+			<f:selectItem itemLabel="Todos" itemValue="n/a" />
+			<f:selectItems value="#{filterViewBean.filterMount.cidades}" />
+		</p:selectOneMenu>
+		<p:outputLabel for="@next" value="Tipo Imóvel:" />
+		<p:selectOneMenu value="#{filterViewBean.filtro.tipoImovel}">
+			<f:selectItem itemLabel="Todos" itemValue="n/a" />
+			<f:selectItems value="#{filterViewBean.filterMount.tipoImovel}" />
+		</p:selectOneMenu>
+		
 		<p:commandButton value="Filtrar" action="#{filterViewBean.getImoveis()}"
 		ajax="false" />
 	</h:form>
