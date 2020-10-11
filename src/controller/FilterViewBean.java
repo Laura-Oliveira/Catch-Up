@@ -1,76 +1,62 @@
 package controller;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Locale;
 
 import entity.Imovel;
-import service.FilterService;
+import service.ImovelService;
 
 import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import entity.Imovel;
 
-@ViewScoped
+@ManagedBean
+@RequestScoped
 public class FilterViewBean implements Serializable {
- 
-    private List<Imovel> cidades;
-    private List<Imovel> filteredCidades;
-    private ImovelBean imovel;
+	
+	private String apartamento;
     private List<Imovel> imoveis;
-    private FilterService filterService;
+    private  Imovel imovel;
     
-    @Inject
-    private FilterService service;
+    @EJB
+    ImovelService imovelService;
  
     @PostConstruct
     public void init() {
-        cidades = service.createCidades(10);
-    }
- 
-    public boolean globalFilterFunction(Object filter) 
-    {
-        String filterText = (filter == null) ? null : filter.toString().trim().toLowerCase();
-        if (filterText == null || filterText.equals("")) 
-        {
-        	imovel.setListaImoveis();
-            return true;    
-        }
-		return false;
-        
-        
-     /*   else if()
- 
-        
-        Imovel imovel = (Imovel) imovel;
-        return  imovel.getCidadeImovel().toLowerCase().contains(filterText)
-                || imovel.getTipoImovel().toLowerCase().contains(filterText); */
-    } 
- 
-    private int getInteger(String string) {
-        try {
-            return Integer.valueOf(string);
-        }
-        catch (NumberFormatException ex) {
-            return 0;
-        }
+    	imovel = imovelService.create();
+    	apartamento = "";
     }
     
-    public List<String> getCidades() {
-        return service.getCidades();
+    public List<Imovel> getImoveis() throws IOException {
+    	
+    	System.out.println(apartamento);
+    	
+    	if(apartamento.equals("Apartamento")) {
+    		imoveis = imovelService.getImovelApartamento();
+            return imoveis;
+    	}
+    	
+        imoveis = imovelService.getAllImoveis();
+        return imoveis;
     }
+
+	public String getApartamento() {
+		return apartamento;
+	}
+
+	public void setApartamento(String apartamento) {
+		this.apartamento = apartamento;
+	}
     
-    public List<Imovel> setListaImoveis()
-    {
-		return imoveis;
-    }
- 
-    public void setFilteredCidades(List<Imovel> filteredCidades) 
-    {
-        this.filteredCidades = filteredCidades;
-    }
+    
  
   /*  public List<Imovel> getImovelTipo() 
     {
@@ -85,8 +71,4 @@ public class FilterViewBean implements Serializable {
         return cidades;
     } */
     
-    public void setService(FilterService service) 
-    {
-        this.service = service;
-    }
 }

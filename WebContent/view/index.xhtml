@@ -69,51 +69,14 @@
 }
 </style>
 
-
 	<h:form>
-		<p:dataTable var="car" value="#{filterViewBean.cidades}"
-			widgetVar="cidadesTable" emptyMessage="Nenhum imóvel encontrado"
-			filteredValue="#{filterViewBean.filteredCidades}">
-
-			<!--     <f:facet name="header">
-            <p:outputPanel>
-                <h:outputText value="Buscar:" />
-                <p:inputText id="globalFilter" onkeyup="PF('cidadesTable').filter()" 
-                style="width:200px" placeholder="Insira uma palavra chave"/>
-            </p:outputPanel>
-        </f:facet>
-         -->
-
-			<p:column filterBy="#{imovel.cidadeImovel}" headerText="Cidade"
-				filterMatchMode="in">
-				<f:facet name="filter">
-					<p:selectCheckboxMenu label="Cidade" onchange="filterViewBean"
-						scrollHeight="150" styleClass="custom-filter">
-						<f:selectItems value="#{filterViewBean.cidades}" />
-					</p:selectCheckboxMenu>
-				</f:facet>
-				<h:outputText value="#{imovelBean.imovel.cidadeImovel}" />
-			</p:column>
-
-			<p:column filterBy="#{imovel.getImovelTipo()}"
-				headerText="Tipo de Imóvel" filterMatchMode="equals">
-				<f:facet name="filter">
-					<p:selectOneButton onchange="PF('cidadesTable').filter()"
-						styleClass="custom-filter">
-						<f:converter converterId="javax.faces.Boolean" />
-						<f:selectItem itemLabel="Todos" itemValue="" />
-						<f:selectItem itemLabel="Apartamento" itemValue="true" />
-						<f:selectItem itemLabel="Casa" itemValue="false" />
-					</p:selectOneButton>
-				</f:facet>
-				<h:outputText
-					value="#{imovelBean.imovel.tipoImovel ? 'Apartamento': 'Casa'}" />
-			</p:column>
-		</p:dataTable>
+		<p:inputText id="apartamento" value="#{filterViewBean.apartamento}" placeholder="Apartamento"/>
+		<p:commandButton value="Filtrar" action="#{filterViewBean.getImoveis()}"
+		ajax="false" />
 	</h:form>
-
+	<br></br>
 	<h:form>
-		<ui:repeat value="#{imovelBean.imoveis}" var="imovel">
+		<ui:repeat value="#{filterViewBean.getImoveis()}" var="imovel">
 			<p:panel id="imovel" header="#{imovel.name}" toggleable="true"
 				toggleSpeed="500" widgetVar="panel" style="margin-bottom:20px">
 				<h:panelGrid columns="2" cellpadding="10">
@@ -127,6 +90,8 @@
 					<h:outputText value="#{imovel.endereco}" />
 					<p:outputLabel value="Cidade:" />
 					<h:outputText value="#{imovel.cidadeImovel}" />
+					<p:outputLabel value="Tipo de Imovel:" />
+					<h:outputText value="#{imovel.tipoImovel}" />
 					<p:outputLabel value="Cômodos:" />
 					<h:outputText value="#{imovel.quantComodos}" />
 

@@ -44,29 +44,16 @@ public class ImovelService extends Service<Imovel> {
         return super.findEntities(Imovel.ALL_IMOVEL);
     }
     
-    public List<Imovel> findAll() {
-		List<Imovel> imovel = null;
-		//Session session = null;
-		//Transaction transaction = null;
-		try {
-			//session = sessionFactory.openSession();
-			//transaction = session.beginTransaction();
-			//imovel = session.createQuery("from Imovel").getResultList();
-			//transaction.commit();
-		} catch (Exception e) {
-			imovel = null;
-			//if(transaction != null) {
-			//	transaction.rollback();
-			//}
-		} finally {
-			//ssession.close();
-		}
-		
-		return imovel; 
-	}
+    @TransactionAttribute(TransactionAttributeType.SUPPORTS)
+    public List<Imovel> getImovelApartamento() 
+    {
+        return super.findEntities(Imovel.IMOVEL_APARTAMENTO);
+    }
     
+    @TransactionAttribute(TransactionAttributeType.SUPPORTS)
+    public List<Imovel> getImovelCasa() 
+    {
+        return super.findEntities(Imovel.IMOVEL_CASA);
+    }
     
-    
-    
-
 }
