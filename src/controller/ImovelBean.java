@@ -16,7 +16,7 @@ import entity.User;
 import service.ImovelService;
 import service.UserService;
 
-@ManagedBean
+@ManagedBean(name="imovelBean")
 @RequestScoped
 public class ImovelBean implements Serializable 
 {
@@ -38,11 +38,6 @@ public class ImovelBean implements Serializable
         
         this.imovel = null;
 
-    }
-
-    public List<Imovel> getImoveis() {
-        imoveis = imovelService.getAllImoveis();
-        return imoveis;
     }
     
     public List<Imovel> setListaImoveis()

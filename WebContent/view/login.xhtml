@@ -18,14 +18,14 @@
 				<p:outputLabel value="Email:" for="email">
 					<h:message for="email" errorStyle="color:darked;font-size:14px;"></h:message>
 				</p:outputLabel>
-				<p:inputText id="email" value="#{userBean.usuario.email}"
+				<p:inputText id="email" value="#{loginBean.email}"
 					title="Email" required="true"
 					requiredMessage="O campo EMAIL é obrigatório."
 					placeholder="Ex.:grace_hopper@gmail.com" />
 				<p:outputLabel value="Senha:" for="password">
 					<h:message for="password" errorStyle="color:darked;font-size:14px;"></h:message>
 				</p:outputLabel>
-				<p:inputText id="password" value="#{userBean.usuario.password}"
+				<p:password id="password" value="#{loginBean.password}"
 					title="Password" required="true"
 					requiredMessage="O campo Senha é obrigatório." />
 			</p:panelGrid>

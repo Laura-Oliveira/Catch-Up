@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.IOException;
 import java.io.Serializable;
 
 import javax.annotation.PostConstruct;
@@ -10,7 +11,6 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
 import entity.User;
-import entity.User_;
 import service.UserService;
 
 @ManagedBean

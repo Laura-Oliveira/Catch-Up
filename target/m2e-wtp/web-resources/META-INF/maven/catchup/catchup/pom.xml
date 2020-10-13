@@ -33,7 +33,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<glassfish.embedded-static-shell.jar>/home/eclipse-workspace/glassfish4/glassfish/lib/embedded/glassfish-embedded-static-shell.jar</glassfish.embedded-static-shell.jar>
+		<glassfish.embedded-static-shell.jar>${env.HOME}/eclipse-workspace/glassfish4/glassfish/lib/embedded/glassfish-embedded-static-shell.jar</glassfish.embedded-static-shell.jar>
 	</properties>
 
 	<dependencies>
@@ -81,6 +81,11 @@
 		    <groupId>org.ocpsoft.rewrite</groupId>
 		    <artifactId>rewrite-servlet</artifactId>
 		    <version>3.4.1.Final</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.slf4j</groupId>
+		    <artifactId>slf4j-simple</artifactId>
+		    <version>1.7.5</version>
 		</dependency>
 		<dependency>
 		    <groupId>org.ocpsoft.rewrite</groupId>
