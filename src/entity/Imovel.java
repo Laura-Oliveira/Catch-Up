@@ -24,8 +24,9 @@ import javax.validation.constraints.Size;
 @NamedQueries(
         {
             @NamedQuery(
-                name = Imovel.IMOVEL_POR_NOME,
-                query = "SELECT c FROM Imovel c WHERE c.name LIKE ?1"
+                name = Imovel.TIPOIMOVEL_CIDADE,
+                query = "SELECT c FROM Imovel c WHERE c.tipoImovel LIKE ?1 AND "
+                		+ "c.cidadeImovel LIKE ?2"
                     
             ),
             @NamedQuery(
@@ -33,21 +34,21 @@ import javax.validation.constraints.Size;
                 query = "SELECT c FROM Imovel c"
             ),
             @NamedQuery(
-        		name = Imovel.IMOVEL_APARTAMENTO,
-        		query = "SELECT C FROM Imovel c WHERE c.tipoImovel LIKE 'Apartamento'"),
+        		name = Imovel.TIPO_IMOVEL,
+        		query = "SELECT C FROM Imovel c WHERE c.tipoImovel LIKE ?1"),
             
             @NamedQuery(
-            		name = Imovel.IMOVEL_CASA,
-            		query = "SELECT C FROM Imovel c WHERE c.tipoImovel LIKE 'Casa'")
+            		name = Imovel.CIDADES,
+            		query = "SELECT C FROM Imovel c WHERE c.cidadeImovel LIKE ?1")
            
         }
 )
 public class Imovel implements Serializable 
 {
-    public static final String IMOVEL_POR_NOME = "ImovelPorNome";
+    public static final String TIPOIMOVEL_CIDADE = "TipoImovelECidade";
     public static final String ALL_IMOVEL = "AllImvel";
-    public static final String IMOVEL_APARTAMENTO = "ImovelApartamento";
-    public static final String IMOVEL_CASA = "ImovelCasa";
+    public static final String TIPO_IMOVEL = "TipoImovel";
+    public static final String CIDADES = "Cidades";
     
   /*  private List<Employee> employeeList;
     private List<Employee> filteredEmployeeList;

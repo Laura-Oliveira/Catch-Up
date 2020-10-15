@@ -24,32 +24,16 @@ public class UserImovelService extends Service<UserImovel> {
         return new UserImovel();
     }
 	
-	public boolean addFavorite(Imovel imovel, User user) {
-    	UserImovel userImovel = new UserImovel();
-    	
-    	
-        TypedQuery<UserImovel> query = entityManager.createNamedQuery(userImovel.IMOVEL_FAVORITO_POR_ID, classe);
-		
-        query.setParameter(1, user.getId());
-        query.setParameter(2, imovel.getId());
-		
-        // se encontrar um userImovel significa que o usuário já favoritou uma vez.
-		if(!query.getResultList().isEmpty()) {
-			// TODO remover favorito
-			
-			return false;
-		}
-		
-		// adicionar favorito na tabela UserImovel
-		userImovel.setImovel(imovel);
-		userImovel.setUser(user);
-		userImovel.setTipo(2);
-		
-		UserImovelBean uiBean = new UserImovelBean();
-//		uiBean.addFavorite();
-		
-		
+	public boolean isFavorito(UserImovel userImovel) {
+//        TypedQuery<UserImovel> query = entityManager.createNamedQuery(userImovel.IMOVEL_FAVORITO_POR_ID, classe);
+//        query.setParameter(1, userImovel.getUser().getId());
+//        query.setParameter(2, userImovel.getImovel().getId());
+//		
+//        // se encontrar um userImovel significa que o usuário já favoritou uma vez.
+//		if(!query.getResultList().isEmpty()) {
+//			return false;
+//		}
+//		
 		return true;
-
     }
 }
