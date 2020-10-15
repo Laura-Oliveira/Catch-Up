@@ -13,9 +13,11 @@ import javax.persistence.Query;
 import javax.servlet.http.HttpServletRequest;
 
 import org.eclipse.persistence.sessions.Session;
+import org.primefaces.component.log.Log;
 
 import java.io.Serializable;
 import java.util.Map;
+import java.util.logging.Logger;
 
 import entity.User;
 import service.UserImovelService;
@@ -30,8 +32,8 @@ public class LoginBean implements Serializable
 	private String password;
 	private String summary;
 	
-	ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-	Map<String, Object> sessionMap = externalContext.getSessionMap();
+//	ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+//	Map<String, Object> sessionMap = externalContext.getSessionMap();
 	
 //	FacesContext context = FacesContext.getCurrentInstance();
 //	HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
@@ -64,9 +66,12 @@ public class LoginBean implements Serializable
 	
 	public void logar() throws IOException 
 	{
+		Logger.getLogger("global").getAnonymousLogger(user.getName());
 		user = userService.getUserPorEmail(email);
 		if(user.getPassword().equals(password)) 
 		{
+			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+			Map<String, Object> sessionMap = externalContext.getSessionMap();
 			sessionMap.put("usuarioLogado", user); // Persiste usuário na sessão.
 			mudarPagina();
 			addMessage(summary);

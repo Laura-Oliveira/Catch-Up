@@ -106,8 +106,11 @@
 					<p:outputLabel value="Cômodos:" />
 					<h:outputText value="#{imovel.quantComodos}" />
 
-					<p:commandButton value="Favoritar"
-						action="#{userImovelBean.addFavorite(imovel)}" />
+					<p:commandButton 
+						value="Favoritar"
+						action="#{userImovelBean.adicionarFavorito(imovel)}" 
+					/>
+					
 				</h:panelGrid>
 			</p:panel>
 		</ui:repeat>

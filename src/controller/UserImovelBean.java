@@ -46,6 +46,7 @@ public class UserImovelBean implements Serializable {
 
 	public void adicionarFavorito(Imovel imovel) {		
 		// Não precisa checar usuário logado, botão só deve ser acessado/apresentado com usuário na sessão.
+		System.out.println("é quente");
 		User user = (User) sessionMap.get("usuarioLogado");
 		this.userImovel.setImovel(imovel);
 		this.userImovel.setUser(user);
