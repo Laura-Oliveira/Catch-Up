@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -45,11 +46,16 @@ import javax.validation.constraints.Size;
             @NamedQuery(
                     name = Imovel.IMOVEL_POR_NOME,
                     query = "SELECT c FROM Imovel c WHERE c.name LIKE ?1"),
-            
+    
             @NamedQuery(
                     name = Imovel.IMOVEL_POR_FAVORITO,
                     query = "SELECT i FROM Imovel i JOIN i.userImovel ui JOIN ui.user u "
                     		+ "WHERE u.id = ?1"),
+            
+            @NamedQuery(
+                    name = Imovel.IMOVEL_FROM_USER,
+                    query = "SELECT c FROM Imovel c WHERE c.user.id = ?1"       
+                ),
         }
 )
 public class Imovel implements Serializable 
@@ -60,6 +66,7 @@ public class Imovel implements Serializable
     public static final String CIDADES = "Cidades";
     public static final String IMOVEL_POR_NOME = "ImovelPorNome";
     public static final String IMOVEL_POR_FAVORITO = "ImovelPorFavorito";
+    public static final String IMOVEL_FROM_USER = "ImovelDoUsuario";
     
     @Id
     @Column(name = "ID")
@@ -97,7 +104,12 @@ public class Imovel implements Serializable
     @NotNull
     @Size (min = 2)
     @Column(name= "TXT_CIDADE", nullable = false)
-    private String cidadeImovel; 
+    private String cidadeImovel;
+    
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name="ID_USER", referencedColumnName = "ID", nullable = false)
+    private User user;
     
     @OneToMany(mappedBy = "imovel")
     @JoinColumn(name = "IMOVEL_ID", nullable = false)
@@ -152,6 +164,14 @@ public class Imovel implements Serializable
 	}
 
 
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
 	}
@@ -159,7 +179,6 @@ public class Imovel implements Serializable
 	 public String getTipoImovel() {
 			return tipoImovel;
 		}
-
 
 		public void setTipoImovel(String tipoImovel) {
 			this.tipoImovel = tipoImovel;
@@ -174,14 +193,11 @@ public class Imovel implements Serializable
 			this.quantComodos = quantComodos;
 		}
 
-
 		public String getCidadeImovel() {
 			return cidadeImovel;
 		}
 
-
 		public void setCidadeImovel(String cidadeImovel) {
 			this.cidadeImovel = cidadeImovel;
-		}
-	
+		}	
 }

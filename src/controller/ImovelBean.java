@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -31,13 +32,26 @@ public class ImovelBean implements Serializable
 	@PostConstruct
     public void iniciar() {
         imovel = imovelService.create();
+        this.imoveis = new ArrayList<Imovel>();
     }
 
     public void salvar() {
+    	ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+		Map<String, Object> sessionMap = externalContext.getSessionMap();
+		User user = (User) sessionMap.get("usuarioLogado");
+		this.imovel.setUser(user);
         this.imovelService.persistence(this.imovel);
         this.imovel = new Imovel();
         addMessage("Imovel cadastrado com sucesso!");
         this.imovel = null;
+    }
+    
+    public List<Imovel> meusImoveis() {
+    	ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+		Map<String, Object> sessionMap = externalContext.getSessionMap();
+		User user = (User) sessionMap.get("usuarioLogado");
+		
+		return this.imoveis = imovelService.getImovelFromUser(user.getId());
     }
     
     public Imovel getImovel() {

@@ -64,4 +64,10 @@ public class ImovelService extends Service<Imovel> {
 		return query.getResultList();
     }
     
+    @TransactionAttribute(TransactionAttributeType.SUPPORTS)
+    public List<Imovel> getImovelFromUser(Long userId) 
+    {
+        return super.findEntities(new Object[]{userId}, Imovel.IMOVEL_FROM_USER);
+    }
+    
 }

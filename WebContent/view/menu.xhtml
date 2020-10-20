@@ -3,6 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui">
+    <h:form>  
     <p:menubar>
         <p:menuitem
             value ="Inicio"
@@ -11,19 +12,38 @@
         <p:menuitem
             value ="Login"
             outcome="/view/login.xhtml"
+            rendered="#{!sessionBean.isLogged()}"
             />
         <p:menuitem
             value ="Cadastro Imovel"
             outcome="/view/registerImovel.xhtml"
+            rendered="#{sessionBean.isLogged()}"
             />
         <p:menuitem
             value ="Cadastrar Usuário"
             outcome="/view/registerUser.xhtml"
+            rendered="#{!sessionBean.isLogged()}"
+            />
+        <p:menuitem
+            value ="Meus Imoveis"
+            outcome="/view/meusImoveis.xhtml"
+            rendered="#{sessionBean.isLogged()}"
+            />
+        <p:menuitem
+            value = "Sair"
+            action = "#{sessionBean.logOut()}"
+            rendered="#{sessionBean.isLogged()}"
             />
              <p:menuitem
             value ="Favoritos"
             outcome="/view/listaFavoritos.xhtml"
             />
     </p:menubar>
+    <br></br>
+    <h:outputLabel
+            value ="Olá, #{sessionBean.usuarioLogado.name}"
+            rendered="#{sessionBean.isLogged()}"
+            />
+    </h:form>
     <p:separator />
 </html>
