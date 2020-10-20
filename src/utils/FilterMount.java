@@ -10,7 +10,7 @@ public class FilterMount {
 	
 	public FilterMount() {
 		tipoImovel = Arrays.asList("Apartamento", "Casa");
-		cidades = Arrays.asList("Cork", "Dblin", "GALWAY", "Limerick", "Waterford");
+		cidades = Arrays.asList("Cork", "Dublin", "Galway", "Limerick", "Waterford");
 	}
 
 	public List<String> getTipoImovel() {

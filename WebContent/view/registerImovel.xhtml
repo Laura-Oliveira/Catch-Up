@@ -52,19 +52,21 @@
 				<p:outputLabel value="Cidade:" for="cidadeImovel">
 					<h:message for="cidadeImovel" errorStyle="color:darked;font-size:14px;"></h:message>
 				</p:outputLabel>
-				<p:inputText id="cidadeImovel" value="#{imovelBean.imovel.cidadeImovel}"
-					title="Cidade" required="true"
-					requiredMessage="O campo CIDADE é obrigatório."
-					placeholder="Ex.:Rua da Concórdia" />
+				<p:selectOneMenu id="cidadeImovel" value="#{imovelBean.imovel.cidadeImovel}" 
+					title="Cidade" required="true">
+					<f:selectItem itemLabel="Selecione" itemValue="n/a" />
+					<f:selectItems value="#{filterViewBean.filterMount.cidades}" />
+				</p:selectOneMenu>
 
 				<p:outputLabel value="Tipo de Imóvel:" for="tipoImovel">
 					<h:message for="tipoImovel"
 						errorStyle="color:darked;font-size:14px;"></h:message>
 				</p:outputLabel>
-				<p:inputText id="tipoImovel" value="#{imovelBean.imovel.tipoImovel}"
-					title="Tipo de Imóvel" required="true"
-					requiredMessage="O campo TIPO DE IMÓVEL é obrigatório."
-					placeholder="Ex.: Apartamento/Casa" />
+				<p:selectOneMenu id="tipoImovel" value="#{imovelBean.imovel.tipoImovel}" 
+					title="Tipo de Imovel" required="true">
+					<f:selectItem itemLabel="Selecione" itemValue="n/a" />
+					<f:selectItems value="#{filterViewBean.filterMount.tipoImovel}" />
+				</p:selectOneMenu>
 
 				<p:outputLabel value="Quantidade de Cômodos:" for="quantComodos">
 					<h:message for="quantComodos"
