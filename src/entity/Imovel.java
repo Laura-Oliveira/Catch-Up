@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -91,7 +92,12 @@ public class Imovel implements Serializable
     @NotNull
     @Size (min = 2)
     @Column(name= "TXT_CIDADE", nullable = false)
-    private String cidadeImovel; 
+    private String cidadeImovel;
+    
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name="ID_USER", referencedColumnName = "ID", nullable = false)
+    private User user;
     
     @OneToMany(mappedBy = "imovel")
     @JoinColumn(name = "IMOVEL_ID", nullable = false)
@@ -145,6 +151,14 @@ public class Imovel implements Serializable
 		return endereco;
 	}
 
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
 
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;

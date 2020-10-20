@@ -60,7 +60,7 @@ public class LoginBean implements Serializable
 	
 	public void logar() throws IOException 
 	{
-		Logger.getLogger("global").getAnonymousLogger(user.getName());
+		//Logger.getLogger("global").getAnonymousLogger(user.getName());
 		user = userService.getUserPorEmail(email);
 		if(user.getPassword().equals(password)) 
 		{
@@ -82,7 +82,7 @@ public class LoginBean implements Serializable
 	  {
 		  try 
 		  {
-			FacesContext.getCurrentInstance().getExternalContext().redirect("view/index.xhtml");
+			FacesContext.getCurrentInstance().getExternalContext().redirect("home");
 		  } 
 		  catch (IOException e) 
 		  {
