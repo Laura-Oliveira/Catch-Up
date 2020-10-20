@@ -1,76 +1,85 @@
 package controller;
 
+import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
+import entity.Filtro;
 import entity.Imovel;
-import service.FilterService;
+import service.ImovelService;
+import utils.FilterMount;
 
 import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import entity.Imovel;
 
-@ViewScoped
+@ManagedBean
+@RequestScoped
 public class FilterViewBean implements Serializable {
- 
-    private List<Imovel> cidades;
-    private List<Imovel> filteredCidades;
-    private ImovelBean imovel;
-    private List<Imovel> imoveis;
-    private FilterService filterService;
+	private Filtro filtro;
+	private FilterMount filterMount;
+    private List<Imovel> imoveis = new ArrayList<Imovel>();
+    private  Imovel imovel;
     
-    @Inject
-    private FilterService service;
+    @EJB
+    ImovelService imovelService;
  
     @PostConstruct
     public void init() {
-        cidades = service.createCidades(10);
-    }
- 
-    public boolean globalFilterFunction(Object filter) 
-    {
-        String filterText = (filter == null) ? null : filter.toString().trim().toLowerCase();
-        if (filterText == null || filterText.equals("")) 
-        {
-        	imovel.setListaImoveis();
-            return true;    
-        }
-		return false;
-        
-        
-     /*   else if()
- 
-        
-        Imovel imovel = (Imovel) imovel;
-        return  imovel.getCidadeImovel().toLowerCase().contains(filterText)
-                || imovel.getTipoImovel().toLowerCase().contains(filterText); */
-    } 
- 
-    private int getInteger(String string) {
-        try {
-            return Integer.valueOf(string);
-        }
-        catch (NumberFormatException ex) {
-            return 0;
-        }
+    	imovel = imovelService.create();
+    	filtro = new Filtro();
+    	filterMount = new FilterMount();
     }
     
-    public List<String> getCidades() {
-        return service.getCidades();
+    public List<Imovel> getImoveis() {
+    	imoveis.clear();
+    	if(filtro.getTipoImovel() != "n/a" && filtro.getCidade().equals("n/a")) {
+    		imoveis.addAll(imovelService.getImovelByTipoImovel(filtro.getTipoImovel()));
+    	}
+    	if(filtro.getCidade() != "n/a" && filtro.getTipoImovel().equals("n/a")) {
+    		imoveis.addAll(imovelService.getImovelByCidade(filtro.getCidade()));
+    	}
+    	if(filtro.getTipoImovel() != "n/a" && filtro.getCidade() != "n/a") {
+    		imoveis.addAll(imovelService.getImovelByTipoAndCidade(filtro.getTipoImovel(), filtro.getCidade()));
+    	}
+    		
+    	if(filtro.getCidade().equals("n/a") && filtro.getTipoImovel().equals("n/a")) {
+    		imoveis = imovelService.getAllImoveis();
+    	}
+    	
+        return imoveis;
     }
     
-    public List<Imovel> setListaImoveis()
-    {
-		return imoveis;
-    }
- 
-    public void setFilteredCidades(List<Imovel> filteredCidades) 
-    {
-        this.filteredCidades = filteredCidades;
-    }
+
+	public Filtro getFiltro() {
+		return filtro;
+	}
+
+	public void setFiltro(Filtro filtro) {
+		this.filtro = filtro;
+	}
+
+	public FilterMount getFilterMount() {
+		return filterMount;
+	}
+
+	public void setFilterMount(FilterMount filterMount) {
+		this.filterMount = filterMount;
+	}
+	
+	
+    
+    
+    
  
   /*  public List<Imovel> getImovelTipo() 
     {
@@ -85,8 +94,4 @@ public class FilterViewBean implements Serializable {
         return cidades;
     } */
     
-    public void setService(FilterService service) 
-    {
-        this.service = service;
-    }
 }

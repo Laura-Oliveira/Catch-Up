@@ -31,7 +31,6 @@ public class UserBean implements Serializable {
         this.userService.persistence(this.usuario);
         this.usuario = new User();
         addMessage("Usuario cadastrado com sucesso!");
-        
         this.usuario = null;
     }
 

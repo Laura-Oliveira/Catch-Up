@@ -7,8 +7,17 @@ import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.persistence.Query;
+import javax.servlet.http.HttpServletRequest;
+
+import org.eclipse.persistence.sessions.Session;
+import org.primefaces.component.log.Log;
+
 import java.io.Serializable;
+import java.util.Map;
+import java.util.logging.Logger;
 
 import entity.User;
 import service.UserImovelService;
@@ -22,6 +31,8 @@ public class LoginBean implements Serializable
 	private String email;
 	private String password;
 	private String summary;
+	
+	Query queryResult=null;
 	
 	@EJB
     UserService userService;
@@ -47,23 +58,19 @@ public class LoginBean implements Serializable
 		this.password = password;
 	}
 	
-	  public void logar() throws IOException 
-	  {
-		  user = userService.getUserPorEmail(email);
-		  if(user.getPassword().equals(password)) 
-		    {
-			  mudarPagina();
-			  addMessage(summary);
-		    } 
-		  /*  try
-		  {
-			  
-		  }
-		  catch(IOException e)
-		  {
-			  System.out.print("Erro " + e);
-		  } */
-	  }
+	public void logar() throws IOException 
+	{
+		//Logger.getLogger("global").getAnonymousLogger(user.getName());
+		user = userService.getUserPorEmail(email);
+		if(user.getPassword().equals(password)) 
+		{
+			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+			Map<String, Object> sessionMap = externalContext.getSessionMap();
+			sessionMap.put("usuarioLogado", user); // Persiste usuário na sessão.
+			mudarPagina();
+			addMessage(summary);
+		} 
+	}
 
 	  public void addMessage(String summary) 
 	  {
@@ -71,15 +78,15 @@ public class LoginBean implements Serializable
 	        FacesContext.getCurrentInstance().addMessage("Usuário logado com sucesso!", message);
 	    }
       
-	  public void mudarPagina()
+	  public void mudarPagina() throws IOException
 	  {
 		  try 
 		  {
-			FacesContext.getCurrentInstance().getExternalContext().redirect("view/index.xhtml");
+			FacesContext.getCurrentInstance().getExternalContext().redirect("home");
 		  } 
 		  catch (IOException e) 
 		  {
-			e.printStackTrace();
+			  FacesContext.getCurrentInstance().getExternalContext().redirect("view/error.xhtml");
 		  }
 	  }
 }

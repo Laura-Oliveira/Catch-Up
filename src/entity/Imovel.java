@@ -1,6 +1,7 @@
 package entity;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Access;
@@ -10,6 +11,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -24,43 +27,47 @@ import javax.validation.constraints.Size;
 @NamedQueries(
         {
             @NamedQuery(
-                name = Imovel.IMOVEL_POR_NOME,
-                query = "SELECT c FROM Imovel c WHERE c.name LIKE ?1"
-                    
+                name = Imovel.TIPOIMOVEL_CIDADE,
+                query = "SELECT c FROM Imovel c WHERE c.tipoImovel LIKE ?1 AND "
+                		+ "c.cidadeImovel LIKE ?2"       
             ),
             @NamedQuery(
                 name = Imovel.ALL_IMOVEL,
                 query = "SELECT c FROM Imovel c"
             ),
             @NamedQuery(
-        		name = Imovel.IMOVEL_APARTAMENTO,
-        		query = "SELECT C FROM Imovel c WHERE c.tipoImovel LIKE 'Apartamento'"),
+        		name = Imovel.TIPO_IMOVEL,
+        		query = "SELECT C FROM Imovel c WHERE c.tipoImovel LIKE ?1"),
             
             @NamedQuery(
-            		name = Imovel.IMOVEL_CASA,
-            		query = "SELECT C FROM Imovel c WHERE c.tipoImovel LIKE 'Casa'")
-           
+            		name = Imovel.CIDADES,
+            		query = "SELECT C FROM Imovel c WHERE c.cidadeImovel LIKE ?1"),
+            
+            @NamedQuery(
+                    name = Imovel.IMOVEL_POR_NOME,
+                    query = "SELECT c FROM Imovel c WHERE c.name LIKE ?1"),
+    
+            @NamedQuery(
+                    name = Imovel.IMOVEL_POR_FAVORITO,
+                    query = "SELECT i FROM Imovel i JOIN i.userImovel ui JOIN ui.user u "
+                    		+ "WHERE u.id = ?1"),
+            
+            @NamedQuery(
+                    name = Imovel.IMOVEL_FROM_USER,
+                    query = "SELECT c FROM Imovel c WHERE c.user.id = ?1"       
+                ),
         }
 )
 public class Imovel implements Serializable 
 {
-    public static final String IMOVEL_POR_NOME = "ImovelPorNome";
+    public static final String TIPOIMOVEL_CIDADE = "TipoImovelECidade";
     public static final String ALL_IMOVEL = "AllImvel";
-    public static final String IMOVEL_APARTAMENTO = "ImovelApartamento";
-    public static final String IMOVEL_CASA = "ImovelCasa";
+    public static final String TIPO_IMOVEL = "TipoImovel";
+    public static final String CIDADES = "Cidades";
+    public static final String IMOVEL_POR_NOME = "ImovelPorNome";
+    public static final String IMOVEL_POR_FAVORITO = "ImovelPorFavorito";
+    public static final String IMOVEL_FROM_USER = "ImovelDoUsuario";
     
-  /*  private List<Employee> employeeList;
-    private List<Employee> filteredEmployeeList;
-
-    @PostConstruct
-    public void postConstruct() {
-        employeeList = DataService.INSTANCE.getEmployeeList();
-    }
-
-    public List<Employee> getEmployeeList() {
-        return employeeList;
-    } */
-
     @Id
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -76,7 +83,6 @@ public class Imovel implements Serializable
     @Column(name= "TXT_INFO", nullable = false)
     private String info;
     
-  /*  @Pattern (regexp = "^(\\([0-9]{2}\\))\\s([9]{1})?([0-9]{4})-([0-9]{4})$", message="{invalid.phone}") */
     @Column(name="PHONE", nullable = false)
     private String phone;
     
@@ -98,16 +104,26 @@ public class Imovel implements Serializable
     @NotNull
     @Size (min = 2)
     @Column(name= "TXT_CIDADE", nullable = false)
-    private String cidadeImovel; 
+    private String cidadeImovel;
+    
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name="ID_USER", referencedColumnName = "ID", nullable = false)
+    private User user;
     
     @OneToMany(mappedBy = "imovel")
-    Set<UserImovel> userImovel;
+    @JoinColumn(name = "IMOVEL_ID", nullable = false)
+    private List<UserImovel> userImovel;
+        
+    public List<UserImovel> getUserImovel() {
+		return userImovel;
+	}
 
-	public Imovel() {
-    }
-    
-    
-    public String getName() 
+	public void setUserImovel(List<UserImovel> userImovel) {
+		this.userImovel = userImovel;
+	}
+
+	public String getName() 
     {
         return name;
     }
@@ -148,6 +164,14 @@ public class Imovel implements Serializable
 	}
 
 
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
 	}
@@ -155,7 +179,6 @@ public class Imovel implements Serializable
 	 public String getTipoImovel() {
 			return tipoImovel;
 		}
-
 
 		public void setTipoImovel(String tipoImovel) {
 			this.tipoImovel = tipoImovel;
@@ -165,20 +188,16 @@ public class Imovel implements Serializable
 		public String getQuantComodos() {
 			return quantComodos;
 		}
-
-
+		
 		public void setQuantComodos(String quantComodos) {
 			this.quantComodos = quantComodos;
 		}
-
 
 		public String getCidadeImovel() {
 			return cidadeImovel;
 		}
 
-
 		public void setCidadeImovel(String cidadeImovel) {
 			this.cidadeImovel = cidadeImovel;
-		}
-	
+		}	
 }

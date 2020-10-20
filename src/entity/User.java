@@ -67,18 +67,28 @@ public class User implements Serializable {
     @Column(name = "TXT_NAME", nullable = false, length = 255)
     private String name;
 
-
     @Column(name = "TXT_EMAIL", nullable = false, length = 70)
     private String email;
 
-
     @Column(name = "TXT_PASSWORD", nullable = false, length = 20)
     private String password;
+    
+    @OneToMany(mappedBy = "user", targetEntity = Imovel.class)
+    private List<Imovel> imovel;
 
     @OneToMany(mappedBy = "user")
-    Set<UserImovel> userImovel;
+    @JoinColumn(name = "USER_ID", nullable = false)
+    private List<UserImovel> userImovel;
     
-    public Long getId() {
+    public List<UserImovel> getUserImovel() {
+		return userImovel;
+	}
+
+	public void setUserImovel(List<UserImovel> userImovel) {
+		this.userImovel = userImovel;
+	}
+
+	public Long getId() {
         return id;
     }
 
@@ -110,8 +120,15 @@ public class User implements Serializable {
         this.password = password;
     }
 
+    public List<Imovel> getImovel() {
+		return imovel;
+	}
 
-    @Override
+	public void setImovel(List<Imovel> imovel) {
+		this.imovel = imovel;
+	}
+
+	@Override
     public int hashCode() {
         int hash = 0;
         hash += (id != null ? id.hashCode() : 0);

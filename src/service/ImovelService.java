@@ -10,12 +10,11 @@ import javax.ejb.TransactionAttributeType;
 import javax.persistence.TypedQuery;
 import entity.Imovel;
 import entity.User;
+import entity.UserImovel;
 
 @Stateless(name = "ejb/ImovelService")
 @LocalBean
 public class ImovelService extends Service<Imovel> {
-
-	//private SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 	
     @PostConstruct
     public void init() {
@@ -26,47 +25,49 @@ public class ImovelService extends Service<Imovel> {
     public Imovel create() {
         return new Imovel();
     }
-
+    
     @Override
     public boolean exist(Imovel imovel) {
-        TypedQuery<Imovel> query
-                = entityManager.createNamedQuery(Imovel.IMOVEL_POR_NOME, classe);
+        TypedQuery<Imovel> query = entityManager.createNamedQuery(Imovel.IMOVEL_POR_NOME, classe);
         query.setParameter(1, imovel.getName());
         return !query.getResultList().isEmpty();
     }
 
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)
-    public Imovel getImoveisPorNome(String nome) {
-        return super.findEntity(new Object[]{nome}, Imovel.IMOVEL_POR_NOME);
-    }
-    @TransactionAttribute(TransactionAttributeType.SUPPORTS)
     public List<Imovel> getAllImoveis() {
         return super.findEntities(Imovel.ALL_IMOVEL);
     }
     
-    public List<Imovel> findAll() {
-		List<Imovel> imovel = null;
-		//Session session = null;
-		//Transaction transaction = null;
-		try {
-			//session = sessionFactory.openSession();
-			//transaction = session.beginTransaction();
-			//imovel = session.createQuery("from Imovel").getResultList();
-			//transaction.commit();
-		} catch (Exception e) {
-			imovel = null;
-			//if(transaction != null) {
-			//	transaction.rollback();
-			//}
-		} finally {
-			//ssession.close();
-		}
-		
-		return imovel; 
-	}
+    @TransactionAttribute(TransactionAttributeType.SUPPORTS)
+    public List<Imovel> getImovelByTipoImovel(String tipoImovel) 
+    {
+        return super.findEntities(new Object[]{tipoImovel}, Imovel.TIPO_IMOVEL);
+    }
     
+    @TransactionAttribute(TransactionAttributeType.SUPPORTS)
+    public List<Imovel> getImovelByCidade(String cidade) 
+    {
+        return super.findEntities(new Object[]{cidade}, Imovel.CIDADES);
+    }
     
+    @TransactionAttribute(TransactionAttributeType.SUPPORTS)
+    public List<Imovel> getImovelByTipoAndCidade(String tipoImovel, String cidade) 
+    {
+        return super.findEntities(new Object[]{tipoImovel, cidade}, Imovel.TIPOIMOVEL_CIDADE);
+    }
     
+    @TransactionAttribute(TransactionAttributeType.SUPPORTS)
+    public List<Imovel> getFavoritos(User user) 
+    {
+		TypedQuery<Imovel> query = entityManager.createNamedQuery(Imovel.IMOVEL_POR_FAVORITO, classe);
+		query.setParameter(1, user.getId());
+		return query.getResultList();
+    }
     
-
+    @TransactionAttribute(TransactionAttributeType.SUPPORTS)
+    public List<Imovel> getImovelFromUser(Long userId) 
+    {
+        return super.findEntities(new Object[]{userId}, Imovel.IMOVEL_FROM_USER);
+    }
+    
 }
