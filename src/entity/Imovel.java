@@ -44,8 +44,11 @@ import javax.validation.constraints.Size;
             
             @NamedQuery(
                     name = Imovel.IMOVEL_POR_NOME,
-                    query = "SELECT c FROM Imovel c WHERE c.name LIKE ?1"),
-        }
+                    query = "SELECT c FROM Imovel c WHERE c.name LIKE ?1")
+      /*      @NamedQuery(
+                    name = Imovel.IMOVEL_POR_FAVORITO,
+                    query = "Select c from UserImovel c join fetch c.id where c.id = :id and c.tipo = :tipo")
+     */   }
 )
 public class Imovel implements Serializable 
 {
@@ -54,6 +57,7 @@ public class Imovel implements Serializable
     public static final String TIPO_IMOVEL = "TipoImovel";
     public static final String CIDADES = "Cidades";
     public static final String IMOVEL_POR_NOME = "ImovelPorNome";
+    public static final String IMOVEL_POR_FAVORITO = "ImovelPorFavorito";
     
     @Id
     @Column(name = "ID")

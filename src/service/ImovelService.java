@@ -10,6 +10,7 @@ import javax.ejb.TransactionAttributeType;
 import javax.persistence.TypedQuery;
 import entity.Imovel;
 import entity.User;
+import entity.UserImovel;
 
 @Stateless(name = "ejb/ImovelService")
 @LocalBean
@@ -53,6 +54,12 @@ public class ImovelService extends Service<Imovel> {
     public List<Imovel> getImovelByTipoAndCidade(String tipoImovel, String cidade) 
     {
         return super.findEntities(new Object[]{tipoImovel, cidade}, Imovel.TIPOIMOVEL_CIDADE);
+    }
+    
+    @TransactionAttribute(TransactionAttributeType.SUPPORTS)
+    public List<Imovel> getImovelByTipoFavorito(String tipoImovelFavorito) 
+    {
+        return super.findEntities(new Object[]{tipoImovelFavorito}, Imovel.IMOVEL_POR_FAVORITO);
     }
     
 }

@@ -1,8 +1,12 @@
 package service;
 
+import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 import javax.persistence.TypedQuery;
 import javax.validation.executable.ExecutableType;
 import javax.validation.executable.ValidateOnExecution;

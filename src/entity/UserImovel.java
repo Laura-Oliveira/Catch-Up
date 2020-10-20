@@ -22,7 +22,7 @@ import javax.persistence.Table;
         {
             @NamedQuery(
                     name = UserImovel.USERIMOVEL_POR_ID,
-                    query = "SELECT c FROM UserImovel c WHERE c.id LIKE ?1"),
+                    query = "SELECT c FROM UserImovel c WHERE c.id LIKE ?1")
         }
 )
 public class UserImovel implements Serializable {
