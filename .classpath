@@ -22,6 +22,5 @@
 			<attribute name="optional" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/home/eclipse-workspace/primefaces-3.4.2.jar.zip"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

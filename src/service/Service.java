@@ -53,7 +53,6 @@ public abstract class Service<T> {
         }
     }
 
-
     public void delete(T entidade) {
         if (exist(entidade)) {
             entidade = entityManager.merge(entidade);

@@ -26,7 +26,7 @@ public class ImovelBean implements Serializable
     @EJB
     ImovelService imovelService;
 
-    @PostConstruct
+	@PostConstruct
     public void iniciar() {
         imovel = imovelService.create();
     }
@@ -35,30 +35,26 @@ public class ImovelBean implements Serializable
         this.imovelService.persistence(this.imovel);
         this.imovel = new Imovel();
         addMessage("Imovel cadastrado com sucesso!");
-        
         this.imovel = null;
-
-    }
-
-    public List<Imovel> getImoveis() {
-        imoveis = imovelService.getAllImoveis();
-        return imoveis;
     }
     
-    public List<Imovel> setListaImoveis()
-    {
-		return imoveis;
-    }
-
     public Imovel getImovel() {
-        return imovel;
-    }
+		return imovel;
+	}
 
-    public void setImovel(Imovel imovel) {
-        this.imovel = imovel;
-    }
-    
-    public void redirectPageRegisterImovel() throws IOException
+	public void setImovel(Imovel imovel) {
+		this.imovel = imovel;
+	}
+
+	public List<Imovel> getImoveis() {
+		return imoveis;
+	}
+
+	public void setImoveis(List<Imovel> imoveis) {
+		this.imoveis = imoveis;
+	}
+
+	public void redirectPageRegisterImovel() throws IOException
     {
     	FacesContext.getCurrentInstance().getExternalContext().redirect("registerImovel.xhtml");
     }

@@ -21,9 +21,11 @@ local.properties
 .settings/
 .loadpath
 
+
 # External tool builders
 .externalToolBuilders/
 
 # Locally stored "Eclipse launch configurations"
 *.launch
 /target/
+/target/m2e-wtp/web-resources/META-INF/maven/catchup/catchup/pom.properties
