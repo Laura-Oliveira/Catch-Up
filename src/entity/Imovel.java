@@ -46,6 +46,12 @@ import javax.validation.constraints.Size;
             @NamedQuery(
                     name = Imovel.IMOVEL_POR_NOME,
                     query = "SELECT c FROM Imovel c WHERE c.name LIKE ?1"),
+    
+            @NamedQuery(
+                    name = Imovel.IMOVEL_POR_FAVORITO,
+                    query = "SELECT i FROM Imovel i JOIN i.userImovel ui JOIN ui.user u "
+                    		+ "WHERE u.id = ?1"),
+            
             @NamedQuery(
                     name = Imovel.IMOVEL_FROM_USER,
                     query = "SELECT c FROM Imovel c WHERE c.user.id = ?1"       
@@ -59,6 +65,7 @@ public class Imovel implements Serializable
     public static final String TIPO_IMOVEL = "TipoImovel";
     public static final String CIDADES = "Cidades";
     public static final String IMOVEL_POR_NOME = "ImovelPorNome";
+    public static final String IMOVEL_POR_FAVORITO = "ImovelPorFavorito";
     public static final String IMOVEL_FROM_USER = "ImovelDoUsuario";
     
     @Id
@@ -173,7 +180,6 @@ public class Imovel implements Serializable
 			return tipoImovel;
 		}
 
-
 		public void setTipoImovel(String tipoImovel) {
 			this.tipoImovel = tipoImovel;
 		}
@@ -187,14 +193,11 @@ public class Imovel implements Serializable
 			this.quantComodos = quantComodos;
 		}
 
-
 		public String getCidadeImovel() {
 			return cidadeImovel;
 		}
 
-
 		public void setCidadeImovel(String cidadeImovel) {
 			this.cidadeImovel = cidadeImovel;
-		}
-	
+		}	
 }

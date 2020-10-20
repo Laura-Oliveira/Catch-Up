@@ -79,4 +79,12 @@ public class ImovelBean implements Serializable
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, null);
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
+    
+    public List<Imovel> getFavoritos()
+    {
+    	ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+		Map<String, Object> sessionMap = externalContext.getSessionMap();
+		User user = (User) sessionMap.get("usuarioLogado");
+		return this.imovelService.getFavoritos(user);
+    }
 }

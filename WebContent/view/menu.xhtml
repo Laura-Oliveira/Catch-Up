@@ -30,11 +30,16 @@
             rendered="#{sessionBean.isLogged()}"
             />
         <p:menuitem
+            value ="Favoritos"
+            outcome="/view/listaFavoritos.xhtml"
+            rendered="#{sessionBean.isLogged()}"
+        	/>
+        <p:menuitem
             value = "Sair"
             action = "#{sessionBean.logOut()}"
             rendered="#{sessionBean.isLogged()}"
             />
-    </p:menubar>
+	</p:menubar>
     <br></br>
     <h:outputLabel
             value ="Olá, #{sessionBean.usuarioLogado.name}"
