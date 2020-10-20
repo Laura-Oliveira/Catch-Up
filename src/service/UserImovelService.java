@@ -4,6 +4,8 @@ import javax.annotation.PostConstruct;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.TypedQuery;
+import javax.validation.executable.ExecutableType;
+import javax.validation.executable.ValidateOnExecution;
 
 import controller.UserImovelBean;
 import entity.Imovel;
@@ -12,6 +14,7 @@ import entity.UserImovel;
 
 @Stateless(name = "ejb/UserImovelService")
 @LocalBean
+@ValidateOnExecution(type = ExecutableType.ALL)
 public class UserImovelService extends Service<UserImovel> {
     
 	@PostConstruct
@@ -23,7 +26,14 @@ public class UserImovelService extends Service<UserImovel> {
     public UserImovel create() {
         return new UserImovel();
     }
-	
+    
+    @Override
+    public boolean exist(UserImovel userImovel) {
+        TypedQuery<UserImovel> query = entityManager.createNamedQuery(userImovel.USERIMOVEL_POR_ID, classe);
+        query.setParameter(1, userImovel.getId());
+        return !query.getResultList().isEmpty();
+    }
+    
 	public boolean isFavorito(UserImovel userImovel) {
 //        TypedQuery<UserImovel> query = entityManager.createNamedQuery(userImovel.IMOVEL_FAVORITO_POR_ID, classe);
 //        query.setParameter(1, userImovel.getUser().getId());

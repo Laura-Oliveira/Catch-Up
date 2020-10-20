@@ -32,12 +32,6 @@ public class LoginBean implements Serializable
 	private String password;
 	private String summary;
 	
-//	ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-//	Map<String, Object> sessionMap = externalContext.getSessionMap();
-	
-//	FacesContext context = FacesContext.getCurrentInstance();
-//	HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
-	
 	Query queryResult=null;
 	
 	@EJB

@@ -49,10 +49,12 @@ public class UserService extends Service<User> {
     public List<User> getUserPorLetra(String letra){
         return super.findEntities(new Object[]{letra}, User.USER_POR_LETRA);
     }
+    
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)
     public List<User> getUserPorNome(String nome){
         return super.findEntities(new Object[]{nome}, User.USER_POR_NOME);
     }
+    
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)
     public List<User> getAllUsers(){
         return super.findEntities(User.ALL_USERS);

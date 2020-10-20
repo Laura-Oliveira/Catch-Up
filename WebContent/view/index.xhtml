@@ -108,8 +108,11 @@
 
 					<p:commandButton 
 						value="Favoritar"
-						action="#{userImovelBean.adicionarFavorito(imovel)}" 
+						actionListener="#{userImovelBean.adicionarFavorito(imovel)}" 
+						onclick="return confirm('Deseja salvar favorito #{imovel.name}?')" 
+						ajax="false" 
 					/>
+	
 					
 				</h:panelGrid>
 			</p:panel>

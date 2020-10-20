@@ -1,5 +1,7 @@
 package entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Column;
@@ -16,16 +18,16 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "user_imovel")
 @Access(AccessType.FIELD)
-//@NamedQueries(
-//    {
-//    	@NamedQuery(
-//	    	name = UserImovel.IMOVEL_FAVORITO_POR_ID,
-//	    	query = "SELECT u FROM UserImovel u WHERE ui.USER_ID = ?1 and ui.IMOVEL_ID = ?2 and ui.tipo = 2"),  // TODO enumerar os tipos.
-//    }
-//)
-public class UserImovel {
+@NamedQueries(
+        {
+            @NamedQuery(
+                    name = UserImovel.USERIMOVEL_POR_ID,
+                    query = "SELECT c FROM UserImovel c WHERE c.id LIKE ?1"),
+        }
+)
+public class UserImovel implements Serializable {
 	
-	public static final String IMOVEL_FAVORITO_POR_ID = "ImovelFavoritoPorId";
+	public static final String USERIMOVEL_POR_ID = "UserImovelPorId";
 	
     @Id
     @Column(name = "ID")
@@ -33,17 +35,17 @@ public class UserImovel {
     private Long id;
     
     @ManyToOne
-    @JoinColumn(name = "USER_ID")
+    @JoinColumn(name = "USER_ID", nullable = false)
     User user;
     
     @ManyToOne
-    @JoinColumn(name = "IMOVEL_ID")
+    @JoinColumn(name = "IMOVEL_ID", nullable = false)
     Imovel imovel;
 
 	@Column(name = "TIPO", nullable = false, length = 70)
     private int tipo;
     
-    @Column(name = "COMENTARIO", nullable = false, length = 70)
+    @Column(name = "COMENTARIO", length = 70)
     private String comentario;
     
     @Column(name="IS_ACTIVE")

@@ -14,8 +14,6 @@ import entity.User;
 @Stateless(name = "ejb/ImovelService")
 @LocalBean
 public class ImovelService extends Service<Imovel> {
-
-	//private SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 	
     @PostConstruct
     public void init() {
@@ -25,6 +23,13 @@ public class ImovelService extends Service<Imovel> {
     @Override
     public Imovel create() {
         return new Imovel();
+    }
+    
+    @Override
+    public boolean exist(Imovel imovel) {
+        TypedQuery<Imovel> query = entityManager.createNamedQuery(Imovel.IMOVEL_POR_NOME, classe);
+        query.setParameter(1, imovel.getName());
+        return !query.getResultList().isEmpty();
     }
 
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)
