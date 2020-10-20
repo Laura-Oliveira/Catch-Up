@@ -52,13 +52,13 @@
 					<h:outputText value="#{imovel.quantComodos}" />
 
 					<p:commandButton 
-						value="Favoritar"
+						value="Favoritar / Remover Favorito"
 						actionListener="#{userImovelBean.adicionarFavorito(imovel)}" 
 						onclick="return confirm('Deseja salvar favorito #{imovel.name}?')" 
 						ajax="false" 
+						rendered="#{sessionBean.isLogged()}"
 					/>
-	
-					
+				
 				</h:panelGrid>
 			</p:panel>
 		</ui:repeat>
