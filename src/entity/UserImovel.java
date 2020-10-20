@@ -22,12 +22,17 @@ import javax.persistence.Table;
         {
             @NamedQuery(
                     name = UserImovel.USERIMOVEL_POR_ID,
-                    query = "SELECT c FROM UserImovel c WHERE c.id LIKE ?1")
+                    query = "SELECT c FROM UserImovel c WHERE c.id LIKE ?1"),
+            
+            @NamedQuery(
+                    name = UserImovel.IMOVEL_FAVORITO_POR_USER_ID_IMOVEL_ID,
+                    query = "SELECT c FROM UserImovel c WHERE c.user.id LIKE ?1 and c.imovel.id LIKE ?2"),
         }
 )
 public class UserImovel implements Serializable {
 	
 	public static final String USERIMOVEL_POR_ID = "UserImovelPorId";
+	public static final String IMOVEL_FAVORITO_POR_USER_ID_IMOVEL_ID = "ImovelFavoritoPorUserIdImovelId";
 	
     @Id
     @Column(name = "ID")

@@ -38,16 +38,15 @@ public class UserImovelService extends Service<UserImovel> {
         return !query.getResultList().isEmpty();
     }
     
-	public boolean isFavorito(UserImovel userImovel) {
-//        TypedQuery<UserImovel> query = entityManager.createNamedQuery(userImovel.IMOVEL_FAVORITO_POR_ID, classe);
-//        query.setParameter(1, userImovel.getUser().getId());
-//        query.setParameter(2, userImovel.getImovel().getId());
-//		
-//        // se encontrar um userImovel significa que o usuário já favoritou uma vez.
-//		if(!query.getResultList().isEmpty()) {
-//			return false;
-//		}
-//		
-		return true;
+    public UserImovel findFavorito(User user, Imovel imovel) {
+    	UserImovel userImovel = null;
+		TypedQuery<UserImovel> query = entityManager.createNamedQuery(userImovel.IMOVEL_FAVORITO_POR_USER_ID_IMOVEL_ID, classe);
+		query.setParameter(1, user.getId());
+		query.setParameter(2, imovel.getId());
+		if(!query.getResultList().isEmpty()) {
+			userImovel = query.getSingleResult();
+		}
+		return  userImovel;
     }
+    
 }
