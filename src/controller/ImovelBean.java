@@ -3,12 +3,14 @@ package controller;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
 import entity.Imovel;
@@ -32,6 +34,10 @@ public class ImovelBean implements Serializable
     }
 
     public void salvar() {
+    	ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+		Map<String, Object> sessionMap = externalContext.getSessionMap();
+		User user = (User) sessionMap.get("usuarioLogado");
+		this.imovel.setUser(user);
         this.imovelService.persistence(this.imovel);
         this.imovel = new Imovel();
         addMessage("Imovel cadastrado com sucesso!");
