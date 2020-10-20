@@ -23,7 +23,7 @@
 	<welcome-file-list>
 		<welcome-file>view/index.xhtml</welcome-file>
 	</welcome-file-list>
-	<!--<error-page>
+	<error-page>
 		<exception-type>java.lang.Throwable</exception-type>
 		<location>/view/error.xhtml</location>
 	</error-page>
@@ -50,5 +50,5 @@
 	<error-page>
 		<exception-type>java.lang.NullPointerException</exception-type>
 		<location>/view/error.xhtml</location>
-	</error-page>-->
+	</error-page>
 </web-app>
