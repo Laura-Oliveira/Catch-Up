@@ -44,11 +44,13 @@ import javax.validation.constraints.Size;
             
             @NamedQuery(
                     name = Imovel.IMOVEL_POR_NOME,
-                    query = "SELECT c FROM Imovel c WHERE c.name LIKE ?1")
-      /*      @NamedQuery(
+                    query = "SELECT c FROM Imovel c WHERE c.name LIKE ?1"),
+            
+            @NamedQuery(
                     name = Imovel.IMOVEL_POR_FAVORITO,
-                    query = "Select c from UserImovel c join fetch c.id where c.id = :id and c.tipo = :tipo")
-     */   }
+                    query = "SELECT i FROM Imovel i JOIN i.userImovel ui JOIN ui.user u "
+                    		+ "WHERE u.id = ?1"),
+        }
 )
 public class Imovel implements Serializable 
 {
