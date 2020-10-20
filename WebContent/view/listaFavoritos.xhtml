@@ -14,7 +14,7 @@
 	<ui:include src="/view/menu.xhtml" />
 
 	<h:form>
-		<ui:repeat value="#{filterViewBean.getImovelByTipoFavorito()}" var="imovel">
+		<ui:repeat value="#{imovelBean.getFavoritos()}" var="imovel">
 			<p:panel id="imovel" header="#{imovel.name}" toggleable="true"
 				toggleSpeed="500" widgetVar="panel" style="margin-bottom:20px">
 				<h:panelGrid columns="2" cellpadding="10">

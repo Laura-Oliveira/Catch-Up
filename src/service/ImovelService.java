@@ -57,9 +57,11 @@ public class ImovelService extends Service<Imovel> {
     }
     
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)
-    public List<Imovel> getImovelByTipoFavorito(String tipoImovelFavorito) 
+    public List<Imovel> getFavoritos(User user) 
     {
-        return super.findEntities(new Object[]{tipoImovelFavorito}, Imovel.IMOVEL_POR_FAVORITO);
+		TypedQuery<Imovel> query = entityManager.createNamedQuery(Imovel.IMOVEL_POR_FAVORITO, classe);
+		query.setParameter(1, user.getId());
+		return query.getResultList();
     }
     
 }

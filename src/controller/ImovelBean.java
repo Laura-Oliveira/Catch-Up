@@ -71,6 +71,6 @@ public class ImovelBean implements Serializable
     	ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
 		Map<String, Object> sessionMap = externalContext.getSessionMap();
 		User user = (User) sessionMap.get("usuarioLogado");
-		return imoveis;
+		return this.imovelService.getFavoritos(user);
     }
 }
