@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<h:head>
+	<title>Catch Up</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</h:head>
+
+<h:body>
+	<ui:include src="/view/menu.xhtml" />
+	<h:form>
+		<ui:repeat value="#{imovelBean.meusImoveis()}" var="imovel">
+			<p:panel id="imovel" header="#{imovel.name}" toggleable="true"
+				toggleSpeed="500" widgetVar="panel" style="margin-bottom:20px">
+				<h:panelGrid columns="2" cellpadding="10">
+					<p:outputLabel value="Título:" />
+					<h:outputText value="#{imovel.name}" />
+					<p:outputLabel value="Informações:" />
+					<h:outputText value="#{imovel.info}" />
+					<p:outputLabel value="Telefone:" />
+					<h:outputText value="#{imovel.phone}" />
+					<p:outputLabel value="Endereço:" />
+					<h:outputText value="#{imovel.endereco}" />
+					<p:outputLabel value="Cidade:" />
+					<h:outputText value="#{imovel.cidadeImovel}" />
+					<p:outputLabel value="Tipo de Imovel:" />
+					<h:outputText value="#{imovel.tipoImovel}" />
+					<p:outputLabel value="Cômodos:" />
+					<h:outputText value="#{imovel.quantComodos}"/>
+				</h:panelGrid>
+			</p:panel>
+		</ui:repeat>
+	</h:form>
+
+</h:body>
+</html>

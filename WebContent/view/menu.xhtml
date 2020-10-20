@@ -25,6 +25,11 @@
             rendered="#{!sessionBean.isLogged()}"
             />
         <p:menuitem
+            value ="Meus Imoveis"
+            outcome="/view/meusImoveis.xhtml"
+            rendered="#{sessionBean.isLogged()}"
+            />
+        <p:menuitem
             value = "Sair"
             action = "#{sessionBean.logOut()}"
             rendered="#{sessionBean.isLogged()}"

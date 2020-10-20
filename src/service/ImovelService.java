@@ -55,4 +55,10 @@ public class ImovelService extends Service<Imovel> {
         return super.findEntities(new Object[]{tipoImovel, cidade}, Imovel.TIPOIMOVEL_CIDADE);
     }
     
+    @TransactionAttribute(TransactionAttributeType.SUPPORTS)
+    public List<Imovel> getImovelFromUser(Long userId) 
+    {
+        return super.findEntities(new Object[]{userId}, Imovel.IMOVEL_FROM_USER);
+    }
+    
 }

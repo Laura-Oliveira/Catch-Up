@@ -22,4 +22,9 @@
       <view-id value="/view/registerImovel.xhtml" />
    </url-mapping>
    
+   <url-mapping id="imoveis">
+      <pattern value="/meus-imoveis" />
+      <view-id value="/view/meusImoveis.xhtml" />
+   </url-mapping>
+   
 </pretty-config>
